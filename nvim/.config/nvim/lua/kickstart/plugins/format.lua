@@ -14,6 +14,29 @@ return {
 			},
 		},
 		opts = {
+			-- Set to true to ignore errors
+			ignore_errors = false,
+			-- Map of treesitter language to file extension
+			-- A temporary file name with this extension will be generated during formatting
+			-- because some formatters care about the filename.
+			lang_to_ext = {
+				bash = "sh",
+				c_sharp = "cs",
+				elixir = "exs",
+				javascript = "js",
+				julia = "jl",
+				latex = "tex",
+				markdown = "md",
+				python = "py",
+				ruby = "rb",
+				rust = "rs",
+				teal = "tl",
+				typescript = "ts",
+			},
+			-- Map of treesitter language to formatters to use
+			-- (defaults to the value from formatters_by_ft)
+			lang_to_formatters = {},
+
 			notify_on_error = false,
 			format_on_save = function(bufnr)
 				-- Disable "format_on_save lsp_fallback" for languages that don't
@@ -37,7 +60,14 @@ return {
 				-- python = { "isort", "black" },
 				--
 				-- You can use 'stop_after_first' to run the first available formatter from the list
-				-- javascript = { "prettierd", "prettier", stop_after_first = true },
+				javascript = { "prettier", stop_after_first = true },
+				json = { "prettier" },
+				svelte = { "prettier" },
+				typescript = { "prettier" },
+				css = { "prettier" },
+				markdown = { "prettier" },
+				xml = { "prettier" },
+				html = { "prettier" },
 			},
 		},
 	},

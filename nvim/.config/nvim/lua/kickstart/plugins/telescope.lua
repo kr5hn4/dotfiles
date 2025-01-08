@@ -24,11 +24,14 @@ return {
 		},
 		config = function()
 			require("telescope").setup({
-				-- defaults = {
-				--   mappings = {
-				--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-				--   },
-				-- },
+				defaults = {
+					file_ignore_patterns = {
+						"node_modules",
+					},
+					--   mappings = {
+					--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+					--   },
+				},
 				-- pickers = {}
 				extensions = {
 					["ui-select"] = {

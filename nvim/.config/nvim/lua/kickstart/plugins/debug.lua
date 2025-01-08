@@ -40,6 +40,35 @@ return {
 		local dap = require("dap")
 		local dapui = require("dapui")
 
+		dap.configurations.typescript = {
+			{
+				-- use nvim-dap-vscode-js's pwa-node debug adapter
+				type = "node2",
+				-- launch a new process to attach the debugger to
+				request = "launch",
+				-- name of the debug action you have to select for this config
+				name = "Launch current file in new node process",
+				program = "${file}",
+			},
+
+			-- {
+			-- 	type = "node2",
+			-- 	name = "node attach",
+			-- 	request = "attach",
+			-- 	program = "${file}",
+			-- 	cwd = vim.fn.getcwd(),
+			-- 	sourceMaps = true,
+			-- 	protocol = "inspector",
+			-- },
+		}
+
+		dap.configurations.javascript = dap.configurations.typescript
+		dap.adapters.node2 = {
+			type = "executable",
+			command = "node-debug2-adapter",
+			args = {},
+		}
+
 		require("mason-nvim-dap").setup({
 			-- Makes a best effort to setup the various debuggers with reasonable debug configurations
 			automatic_installation = true,

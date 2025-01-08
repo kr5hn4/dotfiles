@@ -224,6 +224,9 @@ return {
 			vim.list_extend(ensure_installed, {
 				"stylua",
 				"typescript-language-server",
+				"zls",
+				"delve",
+				"lua-language-server",
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

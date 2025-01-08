@@ -58,3 +58,7 @@ vim.opt.tabstop = 3
 vim.opt.softtabstop = 3
 vim.opt.shiftwidth = 3
 vim.opt.expandtab = false
+vim.opt.colorcolumn = "80"
+-- vim.opt.textwidth = 80
+-- vim.opt.wrap = true
+-- vim.opt.linebreak = true
