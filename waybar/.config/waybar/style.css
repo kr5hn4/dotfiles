@@ -1,0 +1,67 @@
+window#waybar {
+  background: transparent;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+#workspaces {
+  margin-right: 8px;
+  border-radius: 10px;
+  transition: none;
+  background: #383c4a;
+}
+
+#workspaces button {
+  transition: none;
+  color: #7c818c;
+  background: transparent;
+  padding: 5px;
+  font-size: 18px;
+}
+
+#workspaces button.persistent {
+  color: #7c818c;
+  font-size: 12px;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button:hover {
+  transition: none;
+  box-shadow: inherit;
+  text-shadow: inherit;
+  border-radius: inherit;
+  color: #383c4a;
+  background: #7c818c;
+}
+
+#workspaces button.focused {
+  color: white;
+}
+
+#clock,
+#custom-volume,
+#custom-wifi,
+#custom-mem,
+#temperature,
+#tray {
+  margin-right: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 10px 10px 10px 10px;
+  transition: none;
+  color: #ffffff;
+  background: #383c4a;
+}
+
+#temperature.critical {
+  background-color: #eb4d4b;
+}
+
+@keyframes blink {
+  to {
+    background-color: #ffffff;
+    color: #000000;
+  }
+}
