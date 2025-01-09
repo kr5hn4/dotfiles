@@ -1,6 +1,6 @@
 export EDITOR="nvim"
 export VISUAL="nvim"
-export HISTFILE="$ZDOTDIR/.zhistory"    # History filepath
+export HISTFILE=~/.zhistory			  	 # History filepath
 export HISTSIZE=10000                   # Maximum events for internal history
 export SAVEHIST=10000                   # Maximum events in history file
 
@@ -15,6 +15,11 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
 export PATH=$PATH:/opt/android-studio/bin
+
+setopt appendhistory
+bindkey -v
+# Enable searching history with Ctrl+r
+bindkey '^R' history-incremental-search-backward
 
 # Aliases
 alias gs='git status'
@@ -33,6 +38,13 @@ alias grs='git remote show'
 alias tx='tmuxinator'
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
+
+eval "$(zoxide init zsh)"
+
+alias cd="z"
+
+
+bindkey '^y' autosuggest-accept
 
 # Vi mode
 bindkey -v
@@ -73,7 +85,6 @@ prompt_setup() {
 prompt_setup
 
 # Prompt setup end
-
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
