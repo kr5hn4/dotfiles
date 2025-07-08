@@ -6,14 +6,26 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 -- Diagnostic keymaps
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
--- [[ Basic Autocommands ]]
--- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
-vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight when yanking (copying) text",
-	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-	callback = function()
-		vim.highlight.on_yank()
-	end,
-})
+-- Open terminal in a new tab and switch to that tab
+vim.keymap.set(
+	"n",
+	"<leader>t",
+	":tabnew<CR>:terminal<CR>a",
+	{ desc = "Open terminal in new tab and switch to that tab" }
+)
+
+-- Open lazy in a new tab and switch to that tab
+vim.keymap.set("n", "<leader>lg", function()
+	vim.cmd("tabnew | terminal lazygit")
+	vim.cmd("startinsert")
+	-- vim.cmd("stopinsert")
+end, { desc = "Open LazyGit in a new tab" })
+
+-- Go to previous and next tabs with <leader>{h,l}
+vim.keymap.set("n", "<leader>h", function()
+	vim.cmd("tabprevious")
+end, { desc = "Go to the previous tab" })
+
+vim.keymap.set("n", "<leader>l", function()
+	vim.cmd("tabnext")
+end, { desc = "Go to the next tab" })
