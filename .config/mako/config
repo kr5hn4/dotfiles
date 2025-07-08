@@ -1,0 +1,14 @@
+font=FiraCode Nerd Font 12
+background-color=#282828
+text-color=#ebdbb2
+border-color=#fe8019
+border-size=2
+border-radius=8
+padding=12
+margin=20
+default-timeout=5000
+max-visible=5
+width=300
+height=100
+anchor=top-right
+icons=true
