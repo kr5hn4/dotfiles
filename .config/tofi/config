@@ -1,0 +1,34 @@
+# ~/.config/tofi/config
+
+# 📐 Size and Position
+anchor = center
+x = center
+y = center
+width = 40%
+height = 40%
+
+# 🎨 Style
+padding-left = 20
+padding-top = 10
+border-width = 2
+corner-radius = 12
+outline-width = 1
+num-results = 3
+
+# 🧠 Fonts
+font = Fira Code
+font-features = "liga 1" 
+
+# 🌈 Colors (Catppuccin-ish)
+# gruvbox-dark
+text-color       = #ebdbb2
+prompt-color     = #fb4934
+selection-color  = #282828
+background-color = #282828
+selection-background = #ebdbb2
+border-color = #282828
+outline-color = #f38ba8
+match-color = #f38ba8
+
+# 🎞️ Animations
+animate = true
