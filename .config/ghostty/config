@@ -1,23 +1,20 @@
-# The syntax is "key = value". The whitespace around the
-# equals doesn't matter.
-# background = 282c34
-# foreground = ffffff
-
-# Comments start with a `#` and are only valid on their own line.
-# Blank lines are ignored!
+# The syntax is "key = value". The whitespace around the equals doesn't matter.
 
 keybind = ctrl+z=close_surface
 keybind = ctrl+d=new_split:right
 
 # Empty values reset the configuration to the default value
 font-family = Fira Code
+font-family-bold = Fira Code
+font-family-italic = JetBrains Mono
+font-family-bold-italic =  JetBrains Mono
 font-size = 18
 # font-feature = -calt
 # font-feature = -liga
 # font-feature = -dlig
 
-
-theme = GruvboxDarkHard
+theme = GruvboxDark
 window-decoration = false
 
-# custom-shader = /home/krishna/.config/ghostty/ghostty-shaders/glitchy.glsl
+custom-shader-animation = true
+# custom-shader = /home/krishna/.config/ghostty/ghostty-shaders/custom.glsl
