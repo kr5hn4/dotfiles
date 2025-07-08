@@ -1,6 +1,7 @@
 ### Variables
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
+
 # Home row direction keys, like vim
 set $left h
 set $down j
@@ -11,12 +12,15 @@ set $right l
 set $term ghostty
 
 # Preferred application launcher
-set $menu wofi --show drun
+set $menu tofi-drun --drun-launch=true
+
+# Emoji picker
+set $emojipicker emojipick
 
 # Take a screenshot 
 set $screenshot grim -g "$(slurp)" ~/screenshots/"$(date +%Y-%M-%d_%T_)"screenshot.png
 
-# Take a screenshot and copy to clipboard
+# Take a screenshot and copy it to clipboard
 set $screenshot-copy grim -g "$(slurp)" - | wl-copy
 
 # Lock screen
@@ -24,45 +28,20 @@ set $lock swaylock
 
 ### Output configuration
 #
-# Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
-output * bg $HOME/wallpapers/wallpaper.jpg fill
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
+# Set wallpaper
+output * bg $HOME/wallpapers/wallpaper.png fill
 
 ### Idle configuration
 #
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
+# This will lock your screen after 600 seconds of inactivity, then turn off
+# your displays after another 1200 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
-
-### Input configuration
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
+exec swayidle -w \
+         timeout 600 'swaylock -f --image ~/wallpapers/wallpaper.png' \
+         timeout 1200 'systemctl suspend' \
+         before-sleep 'swaylock -f --image ~/wallpapers/wallpaper.png'
 
 ### Key bindings
-#
-# Basics:
 #
 # Start a terminal
 bindsym $mod+Return exec $term
@@ -73,7 +52,7 @@ bindsym $mod+s exec $screenshot-copy
 # Take a screenshot
 bindsym $mod+Shift+s exec $screenshot
 
-# Lock screen
+# L$HOME/.cargoock screen
 bindsym $mod+Shift+p exec $lock
 
 # Kill focused window
@@ -81,6 +60,9 @@ bindsym $mod+Shift+q kill
 
 # Start your launcher
 bindsym $mod+d exec $menu
+
+# Open emoji picker
+bindsym $mod+o exec $emojipicker
 
 # Drag floating windows by holding down $mod and left mouse button.
 # Resize them with right mouse button + $mod.
@@ -136,9 +118,10 @@ bindsym $mod+Shift+7 move container to workspace number 7
 bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
-# Note: workspaces can have any name you want, not just numbers.
-# We just use 1-10 as the default.
-#
+
+
+bindsym $mod+Tab workspace back_and_forth
+
 # Layout stuff:
 #
 # You can "split" the current object of your focus with
@@ -156,20 +139,18 @@ bindsym $mod+v splitv
 bindsym $mod+f fullscreen
 
 # Toggle the current focus between tiling and floating mode
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+space floating toggle
 
 # Swap focus between the tiling area and the floating area
-bindsym $mod+space focus mode_toggle
+bindsym $mod+Shift+space focus mode_toggle
 
 # Move focus to the parent container
 bindsym $mod+a focus parent
-#
+
 # Scratchpad:
 #
 # Sway has a "scratchpad", which is a bag of holding for windows.
 # You can send windows there and get them back later.
-
-# Move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
 
 # Show the next scratchpad window or hide the focused scratchpad window.
@@ -195,16 +176,10 @@ mode "resize" {
 }
 
 # Utilities:
-    # Special keys to adjust volume via PulseAudio
-    bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
-    bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
-    bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
-    bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
-    # Special keys to adjust brightness via brightnessctl
-    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
-    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
-    # Special key to take a screenshot with grim
-    bindsym Print exec grim
+# Special keys to adjust volume via PulseAudio
+bindsym --locked F4 exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+bindsym --locked F2 exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+bindsym --locked F3 exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
 
 # Status Bar:
 # Read `man 5 sway-bar` for more information about this section.
@@ -212,8 +187,11 @@ bar {
     swaybar_command waybar 
 }
 
+# Start programs at startup
+exec mako
 exec swaymsg workspace 1
-exec kitty
+exec ghostty
+exec wl-paste --watch cliphist store
 exec swaymsg workspace 2
 exec sleep 2s && google-chrome-stable
 
