@@ -1,67 +1,69 @@
-window#waybar {
-  background: transparent;
-}
+/* === Gruvbox Dark === */
+@define-color bg       #282828;
+@define-color fg       #ebdbb2;
+@define-color red      #fb4934;
+@define-color green    #b8bb26;
+@define-color yellow   #fabd2f;
+@define-color blue     #83a598;
+@define-color purple   #d3869b;
+@define-color aqua     #8ec07c;
+@define-color gray     #a89984;
+@define-color orange   #fe8019;
 
-window#waybar.hidden {
-  opacity: 0.2;
-}
-
-#workspaces {
-  margin-right: 8px;
-  border-radius: 10px;
-  transition: none;
-  background: #383c4a;
-}
-
-#workspaces button {
-  transition: none;
-  color: #7c818c;
-  background: transparent;
-  padding: 5px;
+* {
+  font-family: Fira Code;
   font-size: 18px;
 }
 
-#workspaces button.persistent {
-  color: #7c818c;
-  font-size: 12px;
+window#waybar {
+  background-color: transparent;
 }
 
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces {
+  color: @fg;
+  border-radius: 10px;
+  background: rgba(56, 60, 74, 0.5);
+}
+
+#workspaces button {
+  color: @fg;
+  border-radius: 10px;
+  transition:
+    background 0.2s,
+    color 0.2s;
+  padding: 5px;
+}
+
 #workspaces button:hover {
-  transition: none;
-  box-shadow: inherit;
-  text-shadow: inherit;
-  border-radius: inherit;
-  color: #383c4a;
-  background: #7c818c;
+  color: @bg;
+  background: @fg;
+  font-weight: bold;
+  transition:
+    background 0.2s,
+    color 0.2s;
 }
 
 #workspaces button.focused {
-  color: white;
+  background: @aqua;
+  color: @bg;
+  font-weight: bold;
+}
+
+#workspaces button.urgent {
+  background: @red;
+  color: @bg;
 }
 
 #clock,
+#custom-mem,
 #custom-volume,
 #custom-wifi,
-#custom-mem,
-#temperature,
 #tray {
+  color: @fg;
   margin-right: 8px;
   padding-left: 16px;
   padding-right: 16px;
   border-radius: 10px 10px 10px 10px;
   transition: none;
-  color: #ffffff;
-  background: #383c4a;
-}
-
-#temperature.critical {
-  background-color: #eb4d4b;
-}
-
-@keyframes blink {
-  to {
-    background-color: #ffffff;
-    color: #000000;
-  }
+  background: rgba(56, 60, 74, 0.5);
 }

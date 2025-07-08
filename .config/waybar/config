@@ -1,61 +1,47 @@
 {
-    "margin": "5 0 0 5",
-    // "width": 1280, // Waybar width
-    "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["clock"],
-    "modules-right": ["custom/wifi", "custom/volume", "custom/mem", "tray"], // add custom/cpu
+  "margin": "5 0 0 5",
+  "modules-left": ["sway/mode", "sway/workspaces", "sway/mode"],
+  "modules-center": ["clock"],
+  "modules-right": ["custom/wifi", "custom/volume", "custom/mem", "tray"],
 
+  "sway/workspaces": {
+    "disable-scroll": true,
+  },
 
-    //***************************
-    //*  Modules configuration  *
-    //***************************
+  "sway/mode": {
+    "format": "<span>{}</span>"
+  },
 
-    "sway/workspaces": {
-        "disable-scroll": true,
-        "persistent_workspaces": {
-            "1": [],
-            "2": [],
-            "3": [],
-            "4": [],
-        },
-    },
+  "clock": {
+    "timezone": "Asia/Kolkata",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format": "{:%a, %d %b, %I:%M %p}"
+  },
 
-    "sway/mode": {
-        "format": "<span>{}</span>"
-    },
-
-    "clock": {
-        // "timezone": "America/New_York",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "{:%a, %d %b, %I:%M %p}"
-    },
-
-"custom/wifi": {
+  "custom/wifi": {
     "format": "{}",
-    "exec": "nmcli -t -f ACTIVE,SSID,SIGNAL dev wifi | grep '^yes' | awk -F ':' '{if ($3 > 70) {print \"   \" $2 \" (\" $3 \" dBm)\"} else if ($3 > 40) {print \"   \" $2 \" (\" $3 \" dBm)\"} else {print \"睊 \" $2 \" (\" $3 \" dBm)\"}}' || echo '睊 Disconnected'",
+    "exec": "~/.config/waybar/get-wifi-details.sh",
     "interval": 10,
     "tooltip": true
-},
-	"custom/volume": {
-		 "format": "{}",
-		 //"exec": "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}'",
-		 "exec": "~/.config/waybar/get-volume-details.sh",
-		 "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
-		 "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
-		 "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-		 "interval": 4,	
-	  },
+  },
+  "custom/volume": {
+    "format": "{}",
+    "exec": "~/.config/waybar/get-volume-details.sh",
+    "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "interval": 4
+  },
 
-    "custom/mem": {
-        "format": "{}",
-        "interval": 5,
-        "exec": "free -h | awk '/Mem:/{printf $3}'",
-        "tooltip": false,
-    },
+  "custom/mem": {
+    "format": "{}",
+    "interval": 5,
+    "exec": "free -h | awk '/Mem:/{printf $3}'",
+    "tooltip": false
+  },
 
-    "tray": {
-        "icon-size": 16,
-        "spacing": 0
-    },
+  "tray": {
+    "icon-size": 16,
+    "spacing": 0
+  }
 }
-
