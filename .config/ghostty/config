@@ -1,5 +1,16 @@
 # The syntax is "key = value". The whitespace around the equals doesn't matter.
 
+# unbind alt+{1..9} to since these are used in tmux to switch between tmux windows
+keybind = alt+1=unbind
+keybind = alt+2=unbind
+keybind = alt+3=unbind
+keybind = alt+4=unbind
+keybind = alt+5=unbind
+keybind = alt+6=unbind
+keybind = alt+7=unbind
+keybind = alt+8=unbind
+keybind = alt+9=unbind
+
 keybind = ctrl+z=close_surface
 keybind = ctrl+d=new_split:right
 
