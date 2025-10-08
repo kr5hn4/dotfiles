@@ -18,10 +18,10 @@ set $menu tofi-drun --drun-launch=true
 set $emojipicker emojipick
 
 # Take a screenshot 
-set $screenshot grim -g "$(slurp)" ~/screenshots/"$(date +%Y-%M-%d_%T_)"screenshot.png
+set $screenshot grim -g "$(slurp -a 16:9)" ~/screenshots/"$(date +%Y-%M-%d_%T_)"screenshot.png
 
 # Take a screenshot and copy it to clipboard
-set $screenshot-copy grim -g "$(slurp)" - | wl-copy
+set $screenshot-copy grim -g "$(slurp -a 16:9)" - | wl-copy
 
 # Lock screen
 set $lock swaylock
@@ -47,10 +47,10 @@ exec swayidle -w \
 bindsym $mod+Return exec $term
 
 # Take a screenshot and copy to clipboard
-bindsym $mod+s exec $screenshot-copy
+bindsym $mod+Shift+s exec $screenshot-copy
 
 # Take a screenshot
-bindsym $mod+Shift+s exec $screenshot
+bindsym $mod+s exec $screenshot
 
 # L$HOME/.cargoock screen
 bindsym $mod+Shift+p exec $lock
@@ -197,5 +197,8 @@ exec sleep 2s && google-chrome-stable
 
 gaps outer 2
 gaps inner 2
+
+assign [app_id="obsidian"] workspace 3
+assign [app_id="tranzit"] workspace 4
 
 include @sysconfdir@/sway/config.d/*
