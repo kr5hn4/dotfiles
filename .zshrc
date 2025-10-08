@@ -1,20 +1,30 @@
 export EDITOR="nvim"
 export VISUAL="nvim"
-export HISTFILE=~/.zhistory			  	 # History filepath
+export HISTFILE=~/.zhistory             # History filepath
 export HISTSIZE=10000                   # Maximum events for internal history
 export SAVEHIST=10000                   # Maximum events in history file
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-. "/home/krishna/.deno/env" 
+. "$HOME/.deno/env" 
+
+source ~/.cargo/env
+
+export XDG_CURRENT_DESKTOP=sway
+export XDG_SESSION_TYPE=wayland
+export QT_QPA_PLATFORM=wayland
 
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 export ANDROID_HOME=$HOME/Android/Sdk
+export ANDROID_NDK_HOME=$HOME/Android/Sdk/ndk/27.1.12297006
+export NDK_HOME=$HOME/Android/Sdk/ndk/27.1.12297006
+export PATH=$ANDROID_NDK_HOME:$PATH
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
 export PATH=$PATH:/opt/android-studio/bin
+export PATH=$PATH:~/go/bin
 
 setopt appendhistory
 bindkey -v
@@ -42,6 +52,8 @@ alias grep='grep --color=auto'
 eval "$(zoxide init zsh)"
 
 alias cd="z"
+alias ls="eza --icons -lh"
+alias tree="eza --tree --long --icons"
 
 
 bindkey '^y' autosuggest-accept
@@ -89,3 +101,6 @@ prompt_setup
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+
+# Created by `pipx` on 2025-04-11 19:36:47
+export PATH="$PATH:$HOME/.local/bin"
