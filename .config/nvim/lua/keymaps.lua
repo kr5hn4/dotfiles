@@ -29,3 +29,18 @@ end, { desc = "Go to the previous tab" })
 vim.keymap.set("n", "<leader>l", function()
 	vim.cmd("tabnext")
 end, { desc = "Go to the next tab" })
+
+-- Keymap to go to the previous tab in terminal mode
+vim.keymap.set("t", "<leader>h", function()
+	vim.cmd("tabprevious")
+end, { desc = "Go to the previous tab (terminal mode)" })
+
+-- Keymap to go to the next tab in terminal mode
+vim.keymap.set("t", "<leader>l", function()
+	vim.cmd("tabnext")
+end, { desc = "Go to the next tab (terminal mode)" })
+
+-- Keymap to go to the next tab in terminal mode
+-- vim.keymap.set("n", "<leader>q", function()
+-- 	vim.cmd("qa")
+-- end, { desc = "Close all files and quit" })
