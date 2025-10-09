@@ -3,7 +3,14 @@ return {
 	version = "*",
 	lazy = false,
 	dependencies = {
-		"nvim-tree/nvim-web-devicons",
+		{
+			"echasnovski/mini.icons",
+			config = function()
+				local MiniIcons = require("mini.icons")
+				MiniIcons.setup()
+				MiniIcons.mock_nvim_web_devicons("codicons") -- or "nerd" or "codicons"
+			end,
+		},
 	},
 	config = function()
 		local nvimtree = require("nvim-tree")
@@ -21,7 +28,7 @@ return {
 
 		nvimtree.setup({
 			view = {
-				side = "right",
+				side = "left",
 				width = 36,
 				relativenumber = true,
 			},

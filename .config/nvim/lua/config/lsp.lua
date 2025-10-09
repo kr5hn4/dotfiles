@@ -12,6 +12,7 @@ return {
 			},
 		},
 	},
+	-- Meta type definitions for the Lua platform Luvit
 	{ "Bilal2453/luvit-meta", lazy = true },
 	{
 		-- Main LSP Configuration
@@ -155,6 +156,11 @@ return {
 				end,
 			})
 
+			-- disable LSP virtual text errors
+			vim.diagnostic.config({
+				-- virtual_text = false,
+			})
+
 			-- Change diagnostic symbols in the sign column (gutter)
 			-- if vim.g.have_nerd_font then
 			--   local signs = { Error = '', Warn = '', Hint = '', Info = '' }
@@ -223,27 +229,58 @@ return {
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
 				"stylua",
+				"gopls",
 				"typescript-language-server",
 				"zls",
 				"delve",
 				"lua-language-server",
+				"bashls",
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
 			require("mason-lspconfig").setup({
 				handlers = {
+
 					function(server_name)
 						local server = servers[server_name] or {}
-						-- This handles overriding only values explicitly passed
-						-- by the server configuration above. Useful when disabling
-						-- certain features of an LSP (for example, turning off formatting for ts_ls)
+
+						-- special case: tsserver config
+						if server_name == "tsserver" or server_name == "ts_ls" then
+							server.init_options = vim.tbl_deep_extend("force", server.init_options or {}, {
+								preferences = {
+									completeJSDocs = true, -- 🚀 enable JSDoc/TSDoc completion
+									includeCompletionsWithInsertText = true,
+									includeCompletionsWithSnippetText = true,
+									completeFunctionCalls = true,
+									includeCompletionsForModuleExports = true,
+								},
+							})
+						end
+
+						-- extend capabilities
 						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+
+						-- on_attach
 						local on_attach = function()
 							vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 						end
 						server.on_attach = on_attach
+
+						-- finally set up
 						require("lspconfig")[server_name].setup(server)
 					end,
+					-- function(server_name)
+					-- 	local server = servers[server_name] or {}
+					-- 	-- This handles overriding only values explicitly passed
+					-- 	-- by the server configuration above. Useful when disabling
+					-- 	-- certain features of an LSP (for example, turning off formatting for ts_ls)
+					-- 	server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+					-- 	local on_attach = function()
+					-- 		vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+					-- 	end
+					-- 	server.on_attach = on_attach
+					-- 	require("lspconfig")[server_name].setup(server)
+					-- end,
 				},
 			})
 		end,

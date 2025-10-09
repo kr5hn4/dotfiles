@@ -19,10 +19,10 @@ return {
 		local dapui = require("dapui")
 		return {
 			-- Basic debugging keymaps, feel free to change to your liking!
-			{ "<F5>", dap.continue, desc = "Debug: Start/Continue" },
-			{ "<F6>", dap.step_into, desc = "Debug: Step Into" },
-			{ "<F7>", dap.step_over, desc = "Debug: Step Over" },
-			{ "<F8>", dap.step_out, desc = "Debug: Step Out" },
+			{ "<F5>",      dap.continue,          desc = "Debug: Start/Continue" },
+			{ "<F6>",      dap.step_into,         desc = "Debug: Step Into" },
+			{ "<F7>",      dap.step_over,         desc = "Debug: Step Over" },
+			{ "<F8>",      dap.step_out,          desc = "Debug: Step Out" },
 			{ "<leader>b", dap.toggle_breakpoint, desc = "Debug: Toggle Breakpoint" },
 			{
 				"<leader>B",
@@ -40,29 +40,7 @@ return {
 		local dap = require("dap")
 		local dapui = require("dapui")
 
-		dap.configurations.typescript = {
-			{
-				-- use nvim-dap-vscode-js's pwa-node debug adapter
-				type = "node2",
-				-- launch a new process to attach the debugger to
-				request = "launch",
-				-- name of the debug action you have to select for this config
-				name = "Launch current file in new node process",
-				program = "${file}",
-			},
-
-			-- {
-			-- 	type = "node2",
-			-- 	name = "node attach",
-			-- 	request = "attach",
-			-- 	program = "${file}",
-			-- 	cwd = vim.fn.getcwd(),
-			-- 	sourceMaps = true,
-			-- 	protocol = "inspector",
-			-- },
-		}
-
-		dap.configurations.javascript = dap.configurations.typescript
+		-- dap.configurations.javascript = dap.configurations.typescript
 		dap.adapters.node2 = {
 			type = "executable",
 			command = "node-debug2-adapter",
@@ -81,12 +59,14 @@ return {
 			ensure_installed = {
 				-- Update this to ensure that you have the debuggers for the langs you want
 				"delve",
+				"node-debug2-adapter",
 			},
 		})
 
 		-- Dap UI setup
 		-- For more information, see |:help nvim-dap-ui|
 		dapui.setup({
+
 			icons = { expanded = "▾", collapsed = "▸", current_frame = "*" },
 			controls = {
 				icons = {
@@ -107,20 +87,20 @@ return {
 		vim.api.nvim_set_hl(0, "DapBreak", { fg = "#e51400" })
 		vim.api.nvim_set_hl(0, "DapStop", { fg = "#ffcc00" })
 		local breakpoint_icons = vim.g.have_nerd_font
-				and {
-					Breakpoint = "",
-					BreakpointCondition = "",
-					BreakpointRejected = "",
-					LogPoint = "",
-					Stopped = "",
-				}
-			or {
-				Breakpoint = "●",
-				BreakpointCondition = "⊜",
-				BreakpointRejected = "⊘",
-				LogPoint = "◆",
-				Stopped = "⭔",
-			}
+			 and {
+				 Breakpoint = "",
+				 BreakpointCondition = "",
+				 BreakpointRejected = "",
+				 LogPoint = "",
+				 Stopped = "",
+			 }
+			 or {
+				 Breakpoint = "●",
+				 BreakpointCondition = "⊜",
+				 BreakpointRejected = "⊘",
+				 LogPoint = "◆",
+				 Stopped = "⭔",
+			 }
 		for type, icon in pairs(breakpoint_icons) do
 			local tp = "Dap" .. type
 			local hl = (type == "Stopped") and "DapStop" or "DapBreak"

@@ -20,7 +20,6 @@ return {
 			-- A temporary file name with this extension will be generated during formatting
 			-- because some formatters care about the filename.
 			lang_to_ext = {
-				bash = "sh",
 				c_sharp = "cs",
 				elixir = "exs",
 				javascript = "js",
@@ -32,6 +31,8 @@ return {
 				rust = "rs",
 				teal = "tl",
 				typescript = "ts",
+				json = "json",
+				zig = "zig",
 			},
 			-- Map of treesitter language to formatters to use
 			-- (defaults to the value from formatters_by_ft)
@@ -66,8 +67,19 @@ return {
 				typescript = { "prettier" },
 				css = { "prettier" },
 				markdown = { "prettier" },
-				xml = { "prettier" },
+				-- xml = { "prettier" },
 				html = { "prettier" },
+				bash = { "shfmt" },
+				sh = { "shfmt" },
+				rust = { "rustfmt" },
+				zig = { "zig" },
+			},
+			formatters = {
+				zig = {
+					command = "zig",
+					args = { "fmt", "--stdin" },
+					stdin = true,
+				},
 			},
 		},
 	},

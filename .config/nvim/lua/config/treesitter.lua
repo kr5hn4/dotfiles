@@ -19,6 +19,7 @@ return {
 				"typescript",
 				"javascript",
 				"go",
+				"asm",
 			},
 			-- Autoinstall languages that are not installed
 			auto_install = true,
