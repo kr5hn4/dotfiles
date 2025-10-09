@@ -1,5 +1,6 @@
 -- [[ Setting options ]]
 
+-- Enable line numbers and relative line numbers
 vim.opt.number = true
 vim.opt.relativenumber = true
 
@@ -41,9 +42,9 @@ vim.opt.timeoutlen = 300
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
--- Sets how neovim will display certain whitespace characters in the editor.
+-- Sets how neovim will display tabs, trailing spaces, EOL, and non-breaking spaces in the editor.
 vim.opt.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣", eol = "↴" }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = "split"
@@ -51,14 +52,23 @@ vim.opt.inccommand = "split"
 -- Show which line your cursor is on
 vim.opt.cursorline = true
 
--- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+-- Minimal number of screen lines to keep above and below the cursor
+vim.opt.scrolloff = 20
 
-vim.opt.tabstop = 3
-vim.opt.softtabstop = 3
-vim.opt.shiftwidth = 3
-vim.opt.expandtab = false
-vim.opt.colorcolumn = "80"
+-- Use 4 spaces for indentation and tabs, and expand tabs to spaces
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+
+-- Highlight column 81 as a visual guide (commonly used to keep lines ≤ 80 chars)
+vim.opt.colorcolumn = "81"
+
+-- Automatically insert a line break when typing past 80 characters
 -- vim.opt.textwidth = 80
--- vim.opt.wrap = true
--- vim.opt.linebreak = true
+-- Make long lines wrap visually
+vim.opt.wrap = true
+-- Wrap at word boundaries, not in the middle of a word
+vim.opt.linebreak = true
+-- Prefix visually wrapped lines with this symbol (doesn't affect file content)
+vim.opt.showbreak = "↪ "
