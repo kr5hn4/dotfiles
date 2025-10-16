@@ -49,6 +49,7 @@ alias tx='tmuxinator'
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
+alias hms='home-manager switch'
 eval "$(zoxide init zsh)"
 
 alias cd="z"
@@ -98,8 +99,8 @@ prompt_setup
 
 # Prompt setup end
 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/.nix-profile/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/.nix-profile/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
 # Created by `pipx` on 2025-04-11 19:36:47
