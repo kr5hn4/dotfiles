@@ -4,6 +4,11 @@ return {
 		-- Enable `lukas-reineke/indent-blankline.nvim`
 		-- See `:help ibl`
 		main = "ibl",
-		opts = {},
+		opts = {
+			indent = {
+				char = "│", -- thin vertical bar
+				tab_char = "│", -- optional: for tab characters
+			},
+		},
 	},
 }

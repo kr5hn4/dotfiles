@@ -19,10 +19,10 @@ return {
 		local dapui = require("dapui")
 		return {
 			-- Basic debugging keymaps, feel free to change to your liking!
-			{ "<F5>",      dap.continue,          desc = "Debug: Start/Continue" },
-			{ "<F6>",      dap.step_into,         desc = "Debug: Step Into" },
-			{ "<F7>",      dap.step_over,         desc = "Debug: Step Over" },
-			{ "<F8>",      dap.step_out,          desc = "Debug: Step Out" },
+			{ "<F5>", dap.continue, desc = "Debug: Start/Continue" },
+			{ "<F6>", dap.step_into, desc = "Debug: Step Into" },
+			{ "<F7>", dap.step_over, desc = "Debug: Step Over" },
+			{ "<F8>", dap.step_out, desc = "Debug: Step Out" },
 			{ "<leader>b", dap.toggle_breakpoint, desc = "Debug: Toggle Breakpoint" },
 			{
 				"<leader>B",
@@ -87,20 +87,20 @@ return {
 		vim.api.nvim_set_hl(0, "DapBreak", { fg = "#e51400" })
 		vim.api.nvim_set_hl(0, "DapStop", { fg = "#ffcc00" })
 		local breakpoint_icons = vim.g.have_nerd_font
-			 and {
-				 Breakpoint = "",
-				 BreakpointCondition = "",
-				 BreakpointRejected = "",
-				 LogPoint = "",
-				 Stopped = "",
-			 }
-			 or {
-				 Breakpoint = "●",
-				 BreakpointCondition = "⊜",
-				 BreakpointRejected = "⊘",
-				 LogPoint = "◆",
-				 Stopped = "⭔",
-			 }
+				and {
+					Breakpoint = "",
+					BreakpointCondition = "",
+					BreakpointRejected = "",
+					LogPoint = "",
+					Stopped = "",
+				}
+			or {
+				Breakpoint = "●",
+				BreakpointCondition = "⊜",
+				BreakpointRejected = "⊘",
+				LogPoint = "◆",
+				Stopped = "⭔",
+			}
 		for type, icon in pairs(breakpoint_icons) do
 			local tp = "Dap" .. type
 			local hl = (type == "Stopped") and "DapStop" or "DapBreak"

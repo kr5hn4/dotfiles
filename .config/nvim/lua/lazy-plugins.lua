@@ -11,7 +11,7 @@ require("lazy").setup({
 	require("config/format"),
 	require("config/git"),
 	require("config/indent_line"),
-	require("config/lint"),
+	-- require("config/lint"),
 	require("config/lsp"),
 	require("config/lspkind"),
 	require("config/mini"),
