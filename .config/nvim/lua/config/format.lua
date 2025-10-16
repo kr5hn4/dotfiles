@@ -20,6 +20,7 @@ return {
 			-- A temporary file name with this extension will be generated during formatting
 			-- because some formatters care about the filename.
 			lang_to_ext = {
+				nix = "nix",
 				c_sharp = "cs",
 				elixir = "exs",
 				javascript = "js",
@@ -61,6 +62,7 @@ return {
 				-- python = { "isort", "black" },
 				--
 				-- You can use 'stop_after_first' to run the first available formatter from the list
+				nix = { "nixfmt" },
 				javascript = { "prettier", stop_after_first = true },
 				json = { "prettier" },
 				svelte = { "prettier" },
