@@ -1,14 +1,37 @@
+### Typography
 font=FiraCode Nerd Font 12
-background-color=#282828
-text-color=#ebdbb2
-border-color=#fe8019
-border-size=2
-border-radius=8
-padding=12
-margin=20
-default-timeout=5000
+
+### Layout & Position
+anchor=top-center
+width=360
+height=120
+padding=18
 max-visible=5
-width=300
-height=100
-anchor=top-right
+
+### Timing
+default-timeout=5000
+
+### Base Styling (Normal)
+background-color=#282828e6
+text-color=#ebdbb2ff
+border-color=#d79921cc
+border-size=1
+border-radius=14
+
+### Icons
 icons=true
+max-icon-size=48
+
+[urgency=low]
+background-color=#32302fe6
+border-color=#689d6acc
+
+[urgency=normal]
+background-color=#282828e6
+border-color=#d79921cc
+
+[urgency=critical]
+background-color=#3c1f1ee6
+border-color=#cc241dcc
+text-color=#fbf1c7ff
+default-timeout=0
