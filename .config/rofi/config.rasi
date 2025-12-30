@@ -6,9 +6,9 @@ configuration {
     font: "Fira Code 16";
 
     /* Window placement */
-    location: 0;        /* top-center */
-    xoffset: 0;
-    yoffset: 0;        /* slight offset from top */
+    location: 2;
+    xoffset: 500;
+    yoffset: 500;
 
     fixed-num-lines: false;
     show-icons: true;
