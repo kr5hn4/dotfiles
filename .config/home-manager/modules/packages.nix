@@ -1,11 +1,5 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    zsh
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-
-    tmux
-
     git
     lazygit
 
