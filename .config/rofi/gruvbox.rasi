@@ -1,0 +1,145 @@
+* {
+    /* Gruvbox Dark palette */
+    base00: #282828; /* background */
+    base01: #3c3836; /* dark grey */
+    base02: #504945; /* grey */
+    base03: #665c54; /* comments / secondary text */
+    base04: #bdae93; /* light grey */
+    base05: #ebdbb2; /* foreground */
+    base06: #fbf1c7; /* bright foreground */
+    base07: #fbf1c7; /* very bright foreground */
+    base08: #fb4934; /* red */
+    base09: #fe8019; /* orange */
+    base0A: #fabd2f; /* yellow */
+    base0B: #b8bb26; /* green */
+    base0C: #8ec07c; /* cyan */
+    base0D: #83a598; /* blue */
+    base0E: #d3869b; /* purple */
+    base0F: #d65d0e; /* brown / accent */
+
+    spacing: 0;
+    background-color: transparent;
+}
+
+window {
+    transparency: "real";
+    padding: 0.5em;
+    spacing: 50px;          /* spacing between children elements */
+    border-radius: 15px;
+    width: 40%;
+    height: 35%;
+
+    anchor: east;           /* anchor position relative to screen */
+    location: 2;       /* centered by default */
+
+    background-color: #282828E6; /* base00 + 80% opacity */
+}
+
+mainbox {
+    /* Elements inside the window in order */
+    // children: [inputbar, listview]; 
+    children: [inputbar, mode-switcher, listview];
+    spacing: 25px;
+    padding: 25px 0;
+    border: 2px;
+    border-radius: 18px;
+    border-color: @base04;
+}
+
+inputbar {
+    padding: 0 30px;
+    children: [prompt, textbox-prompt-colon, entry, case-indicator];
+}
+
+prompt {
+    text-color: @base0D;
+}
+
+textbox-prompt-colon {
+    expand: false;
+    str: ":";
+    margin: 0 1ch 0 0;
+    text-color: @base0D;
+}
+
+entry {
+    text-color: @base05;
+}
+
+case-indicator {
+    text-color: @base0F;
+}
+
+mode-switcher {
+    border: 2px;
+    border-radius: 8px;
+    padding: 12px 18px;
+    background-color: @base03;
+    border-radius: 12px;
+    padding: 6px 145px;
+}
+
+button, textbox {
+    background-color: @base03;
+    text-color: @base05;
+    padding: 5px;
+}
+
+button selected {
+    background-color: @base0D;
+    border-radius: 12px;
+}
+
+listview {
+    scrollbar: true;
+    margin: 0 10px 0 30px;
+}
+
+scrollbar {
+    background-color: @base03;
+    handle-color: @base0D;
+    handle-width: 10px;
+    border: 0 1px;
+    border-color: @base0D;
+    margin: 0 0 0 20px;
+}
+
+element {
+    padding: 5px;
+    spacing: 5px;
+    highlight: bold underline;
+    children: [element-icon, element-text];
+}
+element-text, element-icon {
+    background-color : inherit;
+    text-color      : inherit;
+    foreground-color : inherit;
+    size: 48px;             
+    margin: 0 12px 0 0;    
+    vertical-align: 0.5;  
+}
+
+element normal {
+    background-color: transparent;
+}
+
+element selected {
+    background-color: @base0D;
+    border-radius: 12px;
+}
+
+element alternate {
+    /*background-color: @base03;*/
+}
+
+element normal normal, element selected normal, element alternate normal {
+    text-color: @base05;
+}
+
+element normal urgent, element selected urgent, element alternate urgent {
+    text-color: @base08;
+}
+
+element normal active, element selected active, element alternate active {
+    text-color: @base0B;
+}
