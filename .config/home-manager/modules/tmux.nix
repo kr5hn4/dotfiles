@@ -6,14 +6,9 @@
     prefix = "C-a";
     mouse = true;
     baseIndex = 1;
-    terminal = "screen-256color";
 
     # Plugins (NO TPM)
-    plugins = with pkgs.tmuxPlugins; [
-      vim-tmux-navigator
-      tmux-powerline
-      gruvbox
-    ];
+    # plugins = with pkgs.tmuxPlugins; [];
 
     extraConfig = ''
       # Reload config
@@ -52,6 +47,11 @@
 
       # Clear history + redraw
       bind-key -n C-\; clear-history \; send-keys C-l
+
+
+      # Load plugins (always keep at bottom)
+      run-shell ${pkgs.tmuxPlugins.vim-tmux-navigator}/share/tmux-plugins/vim-tmux-navigator/vim-tmux-navigator.tmux
+      run-shell ${pkgs.tmuxPlugins.gruvbox}/share/tmux-plugins/gruvbox/gruvbox-tpm.tmux
 
       # Gruvbox theme
       set -g @tmux-gruvbox 'dark'

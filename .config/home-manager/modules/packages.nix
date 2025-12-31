@@ -7,7 +7,6 @@
     eza
     yazi
     ripgrep
-    zoxide
     bat
 
     htop
@@ -44,4 +43,7 @@
     # zig toolchain
     zig
   ];
+
+  # Enables zoxide integration in your shell, providing the `z` command for fast directory jumping
+  programs.zoxide.enable = true;
 }
