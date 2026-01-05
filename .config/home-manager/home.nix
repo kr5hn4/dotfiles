@@ -3,6 +3,7 @@
     ./modules/packages.nix
     ./modules/zsh.nix
     ./modules/tmux.nix
+    ./modules/gammastep.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
