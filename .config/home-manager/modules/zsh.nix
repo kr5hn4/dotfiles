@@ -44,7 +44,7 @@
       cd = "z";
     };
 
-    initExtra = ''
+    initContent = ''
       [[ -o interactive ]] || return
 
       # Vi mode
