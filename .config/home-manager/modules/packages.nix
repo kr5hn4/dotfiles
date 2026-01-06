@@ -5,7 +5,6 @@
 
     fzf
     eza
-    yazi
     ripgrep
     bat
 
@@ -14,8 +13,6 @@
 
     zip
     unzip
-
-    mpv
 
     mako
     weechat
@@ -26,6 +23,7 @@
     grim
     slurp
     wf-recorder
+    swappy
 
     # misc
     cmatrix
