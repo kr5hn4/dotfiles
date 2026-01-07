@@ -86,6 +86,7 @@
     "$ANDROID_HOME/cmdline-tools/latest/bin"
     "/opt/android-studio/bin"
     "$HOME/.local/bin"
+    "$HOME/.nix-profile/bin"
 
     # Go
     "$HOME/go/bin"
