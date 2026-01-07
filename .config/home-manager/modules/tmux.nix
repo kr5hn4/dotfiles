@@ -24,6 +24,8 @@
       bind-key -n C-k select-pane -U
       bind-key -n C-l select-pane -R
 
+      set -sg escape-time 50
+
       # New window
       bind-key -n M-n new-window
 
