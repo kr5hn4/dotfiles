@@ -11,9 +11,6 @@ keybind = alt+7=unbind
 keybind = alt+8=unbind
 keybind = alt+9=unbind
 
-keybind = ctrl+z=close_surface
-keybind = ctrl+d=new_split:right
-
 # Empty values reset the configuration to the default value
 font-family = Fira Code
 font-family-bold = Fira Code
