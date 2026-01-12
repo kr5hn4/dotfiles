@@ -17,6 +17,9 @@
     mako
     weechat
 
+    neovim
+
+    fastfetch
     keyd
 
     # screenshots and screen recording
@@ -28,6 +31,9 @@
     # misc
     cmatrix
     cava
+
+    # fast version manager for node
+    fnm
 
     # go toolchain
     go

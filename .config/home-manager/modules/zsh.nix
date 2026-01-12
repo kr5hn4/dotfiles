@@ -84,6 +84,8 @@
 
       # Prompt
       PROMPT=$'%F{white}%~ %B%F{blue}>%f%b '
+
+      eval "$(fnm env --use-on-cd --shell zsh)"
     '';
   };
 }
