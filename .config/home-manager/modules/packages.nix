@@ -34,6 +34,8 @@
     # misc
     cmatrix
     cava
+    toilet
+    figlet
 
     # fast version manager for node
     fnm
