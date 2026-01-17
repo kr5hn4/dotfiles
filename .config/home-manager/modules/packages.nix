@@ -19,6 +19,9 @@
 
     neovim
 
+    fuzzel
+    matugen
+
     fastfetch
     keyd
 
