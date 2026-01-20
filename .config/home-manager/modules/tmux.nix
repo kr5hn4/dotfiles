@@ -3,7 +3,7 @@
     enable = true;
 
     # Core options
-    prefix = "C-a";
+    prefix = "C-b";
     mouse = true;
     baseIndex = 1;
 
@@ -24,7 +24,7 @@
       bind-key -n C-k select-pane -U
       bind-key -n C-l select-pane -R
 
-      set -sg escape-time 50
+      set -sg escape-time 0
 
       # New window
       bind-key -n M-n new-window
