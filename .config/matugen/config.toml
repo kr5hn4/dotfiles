@@ -1,0 +1,8 @@
+[config]
+
+[config.custom_colors]
+customColor1 = {color = "#282828", blend = true}
+
+[templates.ghostty]
+input_path = "~/.config/ghostty/themes/matugen.template"
+output_path = "~/.config/ghostty/themes/matugen"
