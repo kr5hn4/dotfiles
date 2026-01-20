@@ -23,7 +23,9 @@
     matugen
 
     fastfetch
-    keyd
+
+    kanata
+    swww
 
     # screenshots and screen recording
     grim
