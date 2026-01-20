@@ -1,0 +1,42 @@
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]
+  caps a    s    d    f    g    h    j    k    l    ;    '    \    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+(deflayer base
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  @tab q    w    e    r    t    y    u    i    o    p    [    ]
+  @cap a    s    d    f    g    h    j    k    l    ;    '    \    ret
+  lsft z    x    c    @med b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc           ralt rmet rctl
+)
+
+(deflayer numpad
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    7    8    9    _    _    _
+  _    _    _    _    _    _    0    4    5    6    _    _    _    _
+  _    _    _    _    _    _    _    1    2    3    _    _
+  _    _    _              _              _    _    _
+)
+
+(deflayer media
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    prev _    _
+  _    _    _    _    _    _    _    vold volu _    _    _    _    _
+  _    _    _    _    _    _    next mute _    _    _    _
+  _    _    _              pp              _    _    _
+)
+
+(defalias
+  ;; CapsLock: tap for esc, hold for ctrl
+  cap (tap-hold-press 150 150 esc lctl)
+  
+  ;; Tab: tap for tab, hold for numpad layer
+  tab (tap-hold-press 150 150 tab (layer-toggle numpad))
+  
+  ;; V key: tap for v, hold for media layer
+  med (tap-hold-press 150 150 v (layer-toggle media))
+)
