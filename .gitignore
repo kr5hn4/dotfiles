@@ -1,1 +1,4 @@
 .config/tmux/plugins/*
+.icons
+.themes
+.config/systemd/user/default.target.wants/
