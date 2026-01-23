@@ -187,7 +187,7 @@ ShellRoot {
     // =========================
     Timer {
         id: wifiDebounce
-        interval: 500 // Wait 500ms before checking WiFi after events
+        interval: 500
         repeat: false
         onTriggered: wifiCheck.running = true
     }
