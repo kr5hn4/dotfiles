@@ -32,11 +32,11 @@
 
 (defalias
   ;; CapsLock: tap for esc, hold for ctrl
-  cap (tap-hold-press 150 150 esc lctl)
+  cap (tap-hold-press 200 200 esc lctl)
   
   ;; Tab: tap for tab, hold for numpad layer
-  tab (tap-hold-press 150 150 tab (layer-toggle numpad))
+  tab (tap-hold-press 200 200 tab (layer-toggle numpad))
   
   ;; V key: tap for v, hold for media layer
-  med (tap-hold-press 150 150 v (layer-toggle media))
+  med (tap-hold-press 200 200 v (layer-toggle media))
 )
