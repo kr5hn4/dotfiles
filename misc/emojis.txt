@@ -1,0 +1,166 @@
+# group: Smileys & Emotion
+
+# subgroup: face-smiling
+😀 grinning face
+😃 grinning face with big eyes
+😄 grinning face with smiling eyes
+😁 beaming face with smiling eyes
+😆 grinning squinting face
+😅 grinning face with sweat
+🤣 rolling on the floor laughing
+😂 face with tears of joy
+🙂 slightly smiling face
+🙃 upside-down face
+🫠 melting face
+😉 winking face
+😊 smiling face with smiling eyes
+😇 smiling face with halo
+
+# subgroup: face-affection
+🥰 smiling face with hearts
+😍 smiling face with heart-eyes
+🤩 star-struck
+😘 face blowing a kiss
+😗 kissing face
+☺️ smiling face
+263A                                                   ; unqualified         # ☺ E0.6 smiling face
+😚 kissing face with closed eyes
+😙 kissing face with smiling eyes
+🥲 smiling face with tear
+
+# subgroup: face-tongue
+😋 face savoring food
+😛 face with tongue
+😜 winking face with tongue
+🤪 zany face
+😝 squinting face with tongue
+🤑 money-mouth face
+
+# subgroup: face-hand
+🤗 smiling face with open hands
+🤭 face with hand over mouth
+🫢 face with open eyes and hand over mouth
+🫣 face with peeking eye
+🤫 shushing face
+🤔 thinking face
+🫡 saluting face
+
+# subgroup: face-neutral-skeptical
+🤐 zipper-mouth face
+🤨 face with raised eyebrow
+😐 neutral face
+😑 expressionless face
+😶 face without mouth
+🫥 dotted line face
+😶‍🌫️ face in clouds
+1F636 200D 1F32B                                       ; minimally-qualified # 😶‍🌫 E13.1 face in clouds
+😏 smirking face
+😒 unamused face
+🙄 face with rolling eyes
+😬 grimacing face
+😮‍💨 face exhaling
+🤥 lying face
+🫨 shaking face
+🙂‍↔️ head sking horizontally
+1F642 200D 2194                                        ; minimally-qualified # 🙂‍↔ E15.1 head shaking horizontally
+🙂‍↕️ head shaking vertically
+1F642 200D 2195                                        ; minimally-qualified # 🙂‍↕ E15.1 head shaking vertically
+
+# subgroup: face-sleepy
+😌 relieved face
+😔 pensive face
+😪 sleepy face
+🤤 drooling face
+😴 sleeping face
+🫩 face with bags under eyes
+
+# subgroup: face-unwell
+😷 face with medical mask
+🤒 face with thermometer
+🤕 face with head-bandage
+🤢 nauseated face
+🤮 face vomiting
+🤧 sneezing face
+🥵 hot face
+🥶 cold face
+🥴 woozy face
+😵 face with crossed-out eyes
+😵‍💫 face with spiral eyes
+🤯 exploding head
+
+# subgroup: face-hat
+🤠 cowboy hat face
+🥳 partying face
+🥸 disguised face
+
+# subgroup: face-glasses
+😎 smiling face with sunglasses
+🤓 nerd face
+🧐 face with monocle
+
+# subgroup: face-concerned
+😕 confused face
+🫤 face with diagonal mouth
+😟 worried face
+🙁 slightly frowning face
+☹️ frowning face
+2639                                                   ; unqualified         # ☹ E0.7 frowning face
+😮 face with open mouth
+😯 hushed face
+😲 astonished face
+😳 flushed face
+🫪  distorted face
+🥺 pleading face
+🥹 face holding back tears
+😦 frowning face with open mouth
+😧 anguished face
+😨 fearful face
+😰 anxious face with sweat
+😥 sad but relieved face
+😢 crying face
+😭 loudly crying face
+😱 face screaming in fear
+😖 confounded face
+😣 persevering face
+😞 disappointed face
+😓 downcast face with sweat
+😩 weary face
+😫 tired face
+🥱 yawning face
+
+# subgroup: face-negative
+😤 face with steam from nose
+😡 enraged face
+😠 angry face
+🤬 face with symbols on mouth
+😈 smiling face with horns
+👿 angry face with horns
+💀 skull
+☠️ skull and crossbones
+2620                                                   ; unqualified         # ☠ E1.0 skull and crossbones
+
+# subgroup: face-costume
+💩 pile of poo
+🤡 clown face
+👹 ogre
+👺 goblin
+👻 ghost
+👽 alien
+👾 alien monster
+🤖 robot
+
+# subgroup: cat-face
+😺 grinning cat
+😸 grinning cat with smiling eyes
+😹 cat with tears of joy
+😻 smiling cat with heart-eyes
+😼 cat with wry smile
+😽 kissing cat
+🙀 weary cat
+😿 crying cat
+😾 pouting cat
+
+# subgroup: monkey-face
+🙈 see-no-evil monkey
+🙉 hear-no-evil monkey
+🙊 speak-no-evil monkey
