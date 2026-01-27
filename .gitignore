@@ -1,4 +1,9 @@
 .config/tmux/plugins/*
 .icons
 .themes
-.config/systemd/user/default.target.wants/
+
+# ignore everything in user folder
+.config/systemd/user/
+
+# explicitly track what you own
+# !.config/systemd/user/example.service
