@@ -3,8 +3,8 @@
     ./modules/packages.nix
     ./modules/zsh.nix
     ./modules/tmux.nix
-    ./modules/mpv.nix
     ./modules/gammastep.nix
+    ./modules/kanata.nix
     ./modules/yazi.nix
   ];
 
