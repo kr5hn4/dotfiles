@@ -3,7 +3,7 @@
 .themes
 
 # ignore everything in user folder
-.config/systemd/user/
+.config/systemd/user/*
 
 # explicitly track what you own
 # !.config/systemd/user/example.service
