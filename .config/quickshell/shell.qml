@@ -5,7 +5,7 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
 import "components" as Components
-import "modules" as Modules
+// import "modules" as Modules
 
 ShellRoot {
     id: root
@@ -31,7 +31,6 @@ ShellRoot {
     // =========================
     // Font
     // =========================
-
     readonly property string fontFamily: "FiraMono Nerd Font"
     readonly property int fontSize: 18
 
@@ -210,7 +209,7 @@ ShellRoot {
     Process {
         id: wifiCheck
 
-        command: ["sh", "-c", "nmcli -t -f ACTIVE,SSID,SIGNAL dev wifi | awk -F: '/^yes/ { ssid = $2; s = $3; i = (s > 80 ? \"󰤨 \" : s > 60 ? \"󰤥 \" : s > 40 ? \"󰤢 \" : s > 20 ? \"󰤟 \" : \"󰤯 \"); printf \"%s%s\", i, ssid; found = 1; } END { if (!found) print \"󰖪 Disconnected\"; }'"]
+        command: ["sh", "-c", "nmcli -t -f ACTIVE,SSID,SIGNAL dev wifi | awk -F: '/^yes/ { ssid = $2; s = $3; i = (s > 80 ? \"󰤨  \" : s > 60 ? \"󰤥  \" : s > 40 ? \"󰤢  \" : s > 20 ? \"󰤟  \" : \"󰤯  \"); printf \"%s%s\", i, ssid; found = 1; } END { if (!found) print \"󰖪  Disconnected\"; }'"]
         running: false
 
         stdout: SplitParser {
