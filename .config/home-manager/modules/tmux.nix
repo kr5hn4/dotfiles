@@ -18,6 +18,8 @@
       # Status bar
       set -g status-position top
 
+      set-option -g renumber-windows on
+
       # Pane navigation (Ctrl + h/j/k/l)
       bind-key -n C-h select-pane -L
       bind-key -n C-j select-pane -D
