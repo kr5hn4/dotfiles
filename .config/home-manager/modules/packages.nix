@@ -48,7 +48,7 @@
     lua
 
     # rust toolchain
-    rustup
+    # rustup
 
     # zig toolchain
     zig
