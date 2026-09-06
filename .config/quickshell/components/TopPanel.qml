@@ -86,6 +86,10 @@ PanelWindow {
                 spacing: 12
                 Layout.alignment: Qt.AlignVCenter
 
+                NowPlaying {
+                    theme: root.theme
+                }
+
                 Wifi {
                     theme: root.theme
                 }
