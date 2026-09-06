@@ -27,6 +27,7 @@ PanelWindow {
         slideTransform.y = 0;
         notifRect.opacity = 1;
         notifRect.scale = 1;
+        progressTimer.start();
     }
 
     Components.Theme {
@@ -39,8 +40,8 @@ PanelWindow {
     }
 
     margins {
-        top: screen.height * 0.25 // 25% from top
-        right: (screen.width - 380) / 2 // centered horizontally
+        top: screen.height * 0.25
+        right: (screen.width - 380) / 2
     }
 
     Rectangle {
@@ -50,12 +51,65 @@ PanelWindow {
         height: contentColumn.height + 40
         color: Qt.rgba(theme.bg.r, theme.bg.g, theme.bg.b, 0.95)
         radius: 20
-        // Ultra-thin border for definition
         border.color: Qt.rgba(1, 1, 1, 0.1)
         border.width: 1
-        // Initial values
         opacity: 0
         scale: 0.95
+
+        // Progress bar container at the top
+        Rectangle {
+            id: progressContainer
+
+            height: 0.75
+            radius: 16
+            color: theme.muted
+
+            anchors {
+                top: parent.top
+                left: parent.left
+                right: parent.right
+                topMargin: 1
+                leftMargin: 18
+                rightMargin: 18
+            }
+
+            // Animated progress bar
+            Rectangle {
+                id: progressBar
+
+                width: parent.width
+                radius: 16
+                color: {
+                    switch (notification.urgency) {
+                    case NotificationUrgency.Critical:
+                        return theme.red;
+                    case NotificationUrgency.Normal:
+                        return theme.aqua;
+                    case NotificationUrgency.Low:
+                        return theme.muted;
+                    default:
+                        return theme.green;
+                    }
+                }
+                opacity: 0.8
+
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                    bottom: parent.bottom
+                }
+
+                Behavior on width {
+                    NumberAnimation {
+                        duration: 50
+                        easing.type: Easing.Linear
+                    }
+
+                }
+
+            }
+
+        }
 
         // Subtle urgency indicator
         Rectangle {
@@ -251,14 +305,16 @@ PanelWindow {
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
-            z: -1 // Behind other mouse areas
+            z: -1
             onEntered: {
                 notifRect.color = theme.bgAlt;
                 closeTimer.stop();
+                progressTimer.stop();
             }
             onExited: {
                 notifRect.color = theme.bg;
                 closeTimer.restart();
+                progressTimer.restart();
             }
         }
 
@@ -297,17 +353,35 @@ PanelWindow {
 
     }
 
+    // Progress timer - updates every 50ms
+    Timer {
+        id: progressTimer
+
+        property real elapsed: 0
+        property real totalDuration: 4000 // Match closeTimer duration
+
+        interval: 50
+        repeat: true
+        running: false
+        onTriggered: {
+            elapsed += interval;
+            var progress = 1 - (elapsed / totalDuration);
+            progressBar.width = progressContainer.width * Math.max(0, progress);
+            if (progress <= 0)
+                stop();
+
+        }
+    }
+
     Timer {
         id: closeTimer
-
-        interval: 2000
+        interval: 4000
         running: true
         onTriggered: closeNotification()
     }
 
     Timer {
         id: destroyTimer
-
         interval: 200
         onTriggered: notifWindow.destroy()
     }
