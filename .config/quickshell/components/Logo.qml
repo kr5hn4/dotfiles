@@ -6,7 +6,7 @@ Text {
 
     required property var theme
 
-    text: "󰣇"
+    text: "❤️"
     color: theme.archLogoColor
-    font.pixelSize: 32
+    font.pixelSize: 28
 }
