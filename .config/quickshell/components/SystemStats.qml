@@ -253,26 +253,4 @@ Row {
         }
 
     }
-
-    // Power
-    Rectangle {
-        width: powerText.width + 16
-        height: 24
-        radius: root.theme.radius
-        color: root.theme.bgAlt
-        anchors.verticalCenter: parent.verticalCenter
-
-        Text {
-            id: powerText
-
-            anchors.centerIn: parent
-            text: "⏻"
-            color: root.theme.red
-            font.family: root.theme.fontFamily
-            font.pixelSize: root.theme.fontSize - 2
-            font.bold: true
-        }
-
-    }
-
 }
