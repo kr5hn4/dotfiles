@@ -17,8 +17,7 @@ Scope {
     property string deviceInfo: ""
     property bool isPlugIn: true
     // Device cache for unplug detection
-    property var deviceCache: ({
-    })
+    property var deviceCache: ({})
 
     function cacheDevice(path, info) {
         var cache = scope.deviceCache;
@@ -46,14 +45,13 @@ Scope {
         scope.notificationQueue = queue;
         if (!scope.isShowingNotification)
             showNextNotification();
-
     }
 
     // Show next notification from queue
     function showNextNotification() {
         if (scope.notificationQueue.length === 0) {
             scope.isShowingNotification = false;
-            return ;
+            return;
         }
         var queue = scope.notificationQueue;
         var next = queue.shift();
@@ -111,9 +109,9 @@ Scope {
         running: true
 
         stdout: SplitParser {
-            onRead: (data) => {
+            onRead: data => {
                 if (!data)
-                    return ;
+                    return;
 
                 // New event starts
                 if (data.includes("UDEV")) {
@@ -154,10 +152,8 @@ Scope {
                 // Handle REMOVE events
                 if (usbMonitor.action === "remove" && usbMonitor.devPath)
                     removeDebounce.restart();
-
             }
         }
-
     }
 
     // Debounce for remove events
@@ -247,9 +243,7 @@ Scope {
                         width: parent.width
                         elide: Text.ElideRight
                     }
-
                 }
-
             }
 
             // Click to dismiss
@@ -274,13 +268,8 @@ Scope {
                         duration: 300
                         easing.type: Easing.OutCubic
                     }
-
                 }
-
             }
-
         }
-
     }
-
 }

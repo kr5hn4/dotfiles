@@ -11,14 +11,12 @@ ShellRoot {
     // =========================
     property var theme
 
-    theme: Components.Theme {
-    }
+    theme: Components.Theme {}
 
     // Logic Modules
     property var volume
 
-    volume: Components.VolumeEventListener {
-    }
+    volume: Components.VolumeEventListener {}
 
     // =========================
     // Panel
@@ -31,14 +29,12 @@ ShellRoot {
             theme: root.theme
             volumeModule: root.volume
         }
-
     }
 
     // =========================
     // Overlays
     // =========================
-    Components.NotificationServer {
-    }
+    Components.NotificationServer {}
 
     // Volume slider overlay
     Variants {
@@ -63,10 +59,8 @@ ShellRoot {
             onHideRequested: {
                 root.volume.showVolumeOverlay = false;
             }
-            onVolumeChanged: {
-            }
+            onVolumeChanged: {}
         }
-
     }
 
     // Generic Circular Progress Bar - Volume
@@ -82,7 +76,6 @@ ShellRoot {
             colFg: root.theme.fg
             fontFamily: root.theme.fontFamily
         }
-
     }
 
     Variants {
@@ -95,7 +88,6 @@ ShellRoot {
             colFg: root.theme.fg
             fontFamily: root.theme.fontFamily
         }
-
     }
 
     Variants {
@@ -105,7 +97,5 @@ ShellRoot {
             borderColor: root.theme.red
             borderWidth: 3
         }
-
     }
-
 }

@@ -37,9 +37,7 @@ Row {
                     NumberAnimation {
                         duration: 150
                     }
-
                 }
-
             }
 
             Image {
@@ -57,7 +55,7 @@ Row {
                 anchors.fill: parent
                 hoverEnabled: true
                 acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
-                onClicked: (mouse) => {
+                onClicked: mouse => {
                     if (mouse.button === Qt.RightButton && modelData.hasMenu) {
                         // Get position relative to parent window
                         var pos = trayIcon.mapToItem(trayRow.parentWindow.contentItem, 0, trayIcon.height);
@@ -74,9 +72,6 @@ Row {
                     }
                 }
             }
-
         }
-
     }
-
 }

@@ -66,7 +66,6 @@ PanelWindow {
                     font.pixelSize: root.theme.fontSize - 2
                     font.bold: true
                 }
-
             }
 
             Item {
@@ -108,15 +107,11 @@ PanelWindow {
                 SystemTray {
                     parentWindow: barWindow
                 }
-
             }
 
             Item {
                 width: 28
             }
-
         }
-
     }
-
 }

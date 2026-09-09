@@ -28,17 +28,15 @@ Row {
         running: false
 
         stdout: SplitParser {
-            onRead: (data) => {
+            onRead: data => {
                 if (!data)
-                    return ;
+                    return;
 
                 const val = parseInt(data.trim());
                 if (!isNaN(val))
                     root.memUsage = val;
-
             }
         }
-
     }
 
     Process {
@@ -48,17 +46,15 @@ Row {
         running: false
 
         stdout: SplitParser {
-            onRead: (data) => {
+            onRead: data => {
                 if (!data)
-                    return ;
+                    return;
 
                 const val = parseInt(data.trim());
                 if (!isNaN(val))
                     root.cpuUsage = val;
-
             }
         }
-
     }
 
     Timer {
@@ -90,18 +86,16 @@ Row {
         Component.onCompleted: running = true
 
         stdout: SplitParser {
-            onRead: (data) => {
+            onRead: data => {
                 if (!data)
-                    return ;
+                    return;
 
                 const wasRecording = root.isRecording;
                 root.isRecording = (data.trim() === "REC");
                 if (root.isRecording && !wasRecording)
                     root.recordingDuration = 0;
-
             }
         }
-
     }
 
     Timer {
@@ -145,9 +139,7 @@ Row {
                         to: 1
                         duration: 600
                     }
-
                 }
-
             }
 
             Text {
@@ -160,7 +152,6 @@ Row {
                 font.bold: true
                 anchors.verticalCenter: parent.verticalCenter
             }
-
         }
 
         // Pulse animations for the container
@@ -179,7 +170,6 @@ Row {
                 duration: 600
                 easing.type: Easing.InOutSine
             }
-
         }
 
         SequentialAnimation on scale {
@@ -197,9 +187,7 @@ Row {
                 duration: 600
                 easing.type: Easing.InOutSine
             }
-
         }
-
     }
 
     // CPU
@@ -227,9 +215,7 @@ Row {
                     ColorAnimation {
                         duration: 300
                     }
-
                 }
-
             }
 
             Text {
@@ -245,12 +231,8 @@ Row {
                     ColorAnimation {
                         duration: 300
                     }
-
                 }
-
             }
-
         }
-
     }
 }

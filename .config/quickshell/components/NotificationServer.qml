@@ -6,7 +6,7 @@ import Quickshell.Services.Notifications
 NotificationServer {
     id: notificationServer
 
-    onNotification: (notification) => {
+    onNotification: notification => {
         notification.tracked = false;
         // Create a popup window for this notification
         var component = Qt.createComponent("../overlays/NotificationOverlay.qml");

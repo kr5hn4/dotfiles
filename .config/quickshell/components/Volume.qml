@@ -39,7 +39,7 @@ Rectangle {
         onExited: {
             parent.isHovered = false;
         }
-        onWheel: (wheel) => {
+        onWheel: wheel => {
             const change = wheel.angleDelta.y > 0 ? "5%+" : "5%-";
             root.volume.setVolume(change);
         }
@@ -49,7 +49,5 @@ Rectangle {
         NumberAnimation {
             duration: 100
         }
-
     }
-
 }

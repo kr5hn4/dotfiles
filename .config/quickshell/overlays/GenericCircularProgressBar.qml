@@ -60,7 +60,6 @@ Scope {
             // Orange
             if (scope.value > 80)
                 return "#fe8019";
-
         }
         return scope.colAccent;
     }
@@ -84,18 +83,20 @@ Scope {
     Process {
         id: volumeMonitor
 
-        command: ["sh", "-c", "pactl subscribe | grep --line-buffered \"'change' on sink\""]
-        running: scope.osdType === "volume"
+        // pw-mon streams audio state changes in real-time natively
+        command: ["sh", "-c", "pw-mon | grep --line-buffered \"node\""]
+        running: true
 
         stdout: SplitParser {
-            onRead: (data) => {
+            onRead: data => {
                 if (!data)
-                    return ;
+                    // Filter out empty lines or noise
+                    return;
 
+                // Whenever an audio event happens, trigger your volume checker
                 volumeCheck.running = true;
             }
         }
-
     }
 
     // Get current volume value
@@ -106,9 +107,9 @@ Scope {
         running: false
 
         stdout: SplitParser {
-            onRead: (data) => {
+            onRead: data => {
                 if (!data)
-                    return ;
+                    return;
 
                 const match = data.match(/Volume:\s*([\d.]+)/);
                 if (match) {
@@ -123,7 +124,6 @@ Scope {
                 }
             }
         }
-
     }
 
     // Brightness monitoring
@@ -134,9 +134,9 @@ Scope {
         running: scope.osdType === "brightness"
 
         stdout: SplitParser {
-            onRead: (data) => {
+            onRead: data => {
                 if (!data)
-                    return ;
+                    return;
 
                 const parts = data.trim().split(/\s+/);
                 if (parts.length >= 2) {
@@ -148,7 +148,6 @@ Scope {
                 }
             }
         }
-
     }
 
     // Microphone monitoring
@@ -159,14 +158,13 @@ Scope {
         running: scope.osdType === "mic"
 
         stdout: SplitParser {
-            onRead: (data) => {
+            onRead: data => {
                 if (!data)
-                    return ;
+                    return;
 
                 micCheck.running = true;
             }
         }
-
     }
 
     // Get current mic state
@@ -177,9 +175,9 @@ Scope {
         running: false
 
         stdout: SplitParser {
-            onRead: (data) => {
+            onRead: data => {
                 if (!data)
-                    return ;
+                    return;
 
                 const match = data.match(/Volume:\s*([\d.]+)/);
                 if (match)
@@ -190,7 +188,6 @@ Scope {
                 hideTimer.restart();
             }
         }
-
     }
 
     PanelWindow {
@@ -280,7 +277,6 @@ Scope {
                         }
                     }
                 }
-
             }
 
             // Percentage centered with animation
@@ -298,9 +294,7 @@ Scope {
                         duration: 200
                         easing.type: Easing.OutBack
                     }
-
                 }
-
             }
 
             // Icon below percentage
@@ -318,11 +312,8 @@ Scope {
                 NumberAnimation {
                     duration: 150
                 }
-
             }
-
         }
-
     }
 
     // Smooth value animation
@@ -331,7 +322,5 @@ Scope {
             duration: 300
             easing.type: Easing.OutCubic
         }
-
     }
-
 }

@@ -15,10 +15,10 @@ Row {
     property bool isActive: status === "Playing" || status === "Paused"
 
     function formatTime(seconds) {
-        const s = Math.floor(seconds)
-        const mins = Math.floor(s / 60)
-        const secs = s % 60
-        return mins + ":" + (secs < 10 ? "0" : "") + secs
+        const s = Math.floor(seconds);
+        const mins = Math.floor(s / 60);
+        const secs = s % 60;
+        return mins + ":" + (secs < 10 ? "0" : "") + secs;
     }
 
     spacing: 0
@@ -30,11 +30,12 @@ Row {
         running: true
 
         stdout: SplitParser {
-            onRead: (data) => {
-                if (!data) return;
-                const parts = data.trim().split("|")
-                root.trackInfo = parts[0]
-                root.trackLength = parts[1] ? Math.floor(parseInt(parts[1]) / 1000000) : 0
+            onRead: data => {
+                if (!data)
+                    return;
+                const parts = data.trim().split("|");
+                root.trackInfo = parts[0];
+                root.trackLength = parts[1] ? Math.floor(parseInt(parts[1]) / 1000000) : 0;
             }
         }
     }
@@ -45,31 +46,34 @@ Row {
         running: true
 
         stdout: SplitParser {
-            onRead: (data) => {
-                if (!data) return;
-                root.status = data.trim()
+            onRead: data => {
+                if (!data)
+                    return;
+                root.status = data.trim();
             }
         }
     }
 
     Process {
-    id: positionProc
-    command: ["playerctl", "position"]
-    running: false
+        id: positionProc
+        command: ["playerctl", "position"]
+        running: false
 
-    onRunningChanged: {
-        if (!running) positionProc.running = false
-    }
+        onRunningChanged: {
+            if (!running)
+                positionProc.running = false;
+        }
 
-    stdout: SplitParser {
-        onRead: (data) => {
-            if (!data) return;
-            const val = parseFloat(data.trim())
-            if (!isNaN(val)) root.trackPosition = val
+        stdout: SplitParser {
+            onRead: data => {
+                if (!data)
+                    return;
+                const val = parseFloat(data.trim());
+                if (!isNaN(val))
+                    root.trackPosition = val;
+            }
         }
     }
-}
-
 
     Timer {
         interval: 1000

@@ -44,9 +44,13 @@ Item {
     readonly property var workspaceIcons: ["󰆍", "", "", "󰚩", "", "󰡳", "󱛿", "", "󰂖"]
 
     function switchTag(tagNum) {
-        tagSwitchProc.command = ["mmsg", "-s", "-t", tagNum.toString()];
+        tagSwitchProc.command = ["mmsg", "dispatch", "view_tag," + tagNum.toString()];
         tagSwitchProc.running = true;
     }
+    // function switchTag(tagNum) {
+    //     tagSwitchProc.command = ["mmsg", "-s", "-t", tagNum.toString()];
+    //     tagSwitchProc.running = true;
+    // }
 
     function parseLayoutMode(code) {
         return layoutModeMap[code] || "tile";
@@ -59,7 +63,8 @@ Item {
     Process {
         id: tagSwitchProc
 
-        command: ["mmsg", "-s", "-t", "1"]
+        command: ["mmsg", "dispatch", "view,1"]
+        // command: ["mmsg", "-s", "-t", "1"]
         running: false
     }
 

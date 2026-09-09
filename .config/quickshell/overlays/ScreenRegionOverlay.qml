@@ -24,14 +24,13 @@ Scope {
         running: true
 
         stdout: SplitParser {
-            onRead: (data) => {
+            onRead: data => {
                 if (!data)
-                    return ;
+                    return;
 
                 regionCheck.running = true;
             }
         }
-
     }
 
     // Check overlay region file
@@ -42,10 +41,10 @@ Scope {
         running: false
 
         stdout: SplitParser {
-            onRead: (data) => {
+            onRead: data => {
                 if (!data || data.trim() === "" || data.includes("FILE_NOT_FOUND")) {
                     scope.showOverlay = false;
-                    return ;
+                    return;
                 }
                 // Parse geometry: "X,Y WxH" (e.g., "100,200 500x300")
                 const match = data.trim().match(/(\d+),(\d+)\s+(\d+)x(\d+)/);
@@ -60,7 +59,6 @@ Scope {
                 }
             }
         }
-
     }
 
     // Initial check
@@ -158,11 +156,7 @@ Scope {
                     duration: 1000
                     easing.type: Easing.InOutSine
                 }
-
             }
-
         }
-
     }
-
 }

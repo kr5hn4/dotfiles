@@ -104,11 +104,8 @@ PanelWindow {
                         duration: 50
                         easing.type: Easing.Linear
                     }
-
                 }
-
             }
-
         }
 
         // Subtle urgency indicator
@@ -135,7 +132,6 @@ PanelWindow {
                 topMargin: 16
                 bottomMargin: 16
             }
-
         }
 
         Row {
@@ -176,9 +172,7 @@ PanelWindow {
                         font.pixelSize: 20
                         font.bold: true
                     }
-
                 }
-
             }
 
             Column {
@@ -258,15 +252,10 @@ PanelWindow {
                                     closeNotification();
                                 }
                             }
-
                         }
-
                     }
-
                 }
-
             }
-
         }
 
         // Close button (top right)
@@ -298,7 +287,6 @@ PanelWindow {
                 cursorShape: Qt.PointingHandCursor
                 onClicked: closeNotification()
             }
-
         }
 
         // Hover interaction
@@ -324,7 +312,6 @@ PanelWindow {
                 duration: 150
                 easing.type: Easing.OutCubic
             }
-
         }
 
         Behavior on scale {
@@ -332,7 +319,6 @@ PanelWindow {
                 duration: 150
                 easing.type: Easing.OutCubic
             }
-
         }
 
         // Transform for slide animation
@@ -346,11 +332,8 @@ PanelWindow {
                     duration: 150
                     easing.type: Easing.OutCubic
                 }
-
             }
-
         }
-
     }
 
     // Progress timer - updates every 50ms
@@ -369,7 +352,6 @@ PanelWindow {
             progressBar.width = progressContainer.width * Math.max(0, progress);
             if (progress <= 0)
                 stop();
-
         }
     }
 
@@ -385,5 +367,4 @@ PanelWindow {
         interval: 200
         onTriggered: notifWindow.destroy()
     }
-
 }

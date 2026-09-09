@@ -23,8 +23,8 @@ PanelWindow {
     property bool sliderPressed: false
 
     // Signals to communicate back to parent
-    signal hideRequested()
-    signal volumeChanged()
+    signal hideRequested
+    signal volumeChanged
 
     // Expose method to stop hide timer from parent
     function stopHideTimer() {
@@ -34,7 +34,6 @@ PanelWindow {
     function startHideTimer() {
         if (!sliderPressed && !sliderHovered)
             hideTimer.restart();
-
     }
 
     width: 200
@@ -84,15 +83,14 @@ PanelWindow {
             volumePanel.sliderHovered = false;
             if (!volumePanel.sliderPressed)
                 hideTimer.restart();
-
         }
-        onPressed: (mouse) => {
+        onPressed: mouse => {
             return mouse.accepted = false;
         }
-        onReleased: (mouse) => {
+        onReleased: mouse => {
             return mouse.accepted = false;
         }
-        onWheel: (wheel) => {
+        onWheel: wheel => {
             return wheel.accepted = false;
         }
     }
@@ -166,7 +164,6 @@ PanelWindow {
                 duration: 150
                 easing.type: Easing.OutQuad
             }
-
         }
 
         Behavior on scale {
@@ -174,9 +171,7 @@ PanelWindow {
                 duration: 150
                 easing.type: Easing.OutQuad
             }
-
         }
-
     }
 
     // Content on top
@@ -214,7 +209,6 @@ PanelWindow {
                     } else {
                         if (!volumePanel.sliderHovered)
                             hideTimer.restart();
-
                     }
                 }
                 onMoved: {
@@ -239,7 +233,6 @@ PanelWindow {
                         color: volumePanel.colGreen
                         radius: 2
                     }
-
                 }
 
                 handle: Rectangle {
@@ -254,15 +247,11 @@ PanelWindow {
                     border.color: volumePanel.colFg
                     border.width: 2
                 }
-
             }
-
         }
-
     }
 
     mask: Region {
         item: backgroundCanvas
     }
-
 }

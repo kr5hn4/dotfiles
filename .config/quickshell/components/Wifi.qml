@@ -43,14 +43,13 @@ Rectangle {
         running: true
 
         stdout: SplitParser {
-            onRead: (data) => {
+            onRead: data => {
                 if (!data)
-                    return ;
+                    return;
 
                 wifiDebounce.restart();
             }
         }
-
     }
 
     Process {
@@ -60,14 +59,13 @@ Rectangle {
         running: false
 
         stdout: SplitParser {
-            onRead: (data) => {
+            onRead: data => {
                 if (!data)
-                    return ;
+                    return;
 
                 root.wifiInfo = data.trim();
             }
         }
-
     }
 
     // Initial WiFi check
@@ -77,5 +75,4 @@ Rectangle {
         repeat: false
         onTriggered: wifiCheck.running = true
     }
-
 }

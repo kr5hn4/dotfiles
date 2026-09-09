@@ -21,18 +21,20 @@ Item {
     Process {
         id: volumeMonitor
 
-        command: ["sh", "-c", "pactl subscribe | grep --line-buffered \"'change' on sink\""]
+        // pw-mon streams audio state changes in real-time natively
+        command: ["sh", "-c", "pw-mon | grep --line-buffered \"node\""]
         running: true
 
         stdout: SplitParser {
-            onRead: (data) => {
+            onRead: data => {
                 if (!data)
-                    return ;
+                    // Filter out empty lines or noise
+                    return;
 
+                // Whenever an audio event happens, trigger your volume checker
                 volumeCheck.running = true;
             }
         }
-
     }
 
     Process {
@@ -42,9 +44,9 @@ Item {
         running: false
 
         stdout: SplitParser {
-            onRead: (data) => {
+            onRead: data => {
                 if (!data)
-                    return ;
+                    return;
 
                 const match = data.match(/Volume:\s*([\d.]+)/);
                 if (match)
@@ -53,7 +55,6 @@ Item {
                 root.volumeMuted = data.includes("[MUTED]");
             }
         }
-
     }
 
     // Initial volume check
@@ -80,5 +81,4 @@ Item {
         repeat: false
         onTriggered: root.showVolumeOSD = false
     }
-
 }
