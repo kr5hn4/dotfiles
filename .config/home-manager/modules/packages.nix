@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   # Allow installation of proprietary/non-open-source packages (e.g. Google-Chrome, Obsidian, Discord)
   nixpkgs.config.allowUnfree = true;
 
@@ -22,13 +22,28 @@
 
     neovim
 
+    # mason tools
+
+    # Treesitter
+    tree-sitter
+    gcc
+
+    # Formatter
+    nixfmt
+
+    # LSP servers
+    lua-language-server
+    stylua
+
+    # mason tools end
+
     fuzzel
     matugen
 
     fastfetch
 
     kanata
-    swww
+    awww
 
     # screenshots and screen recording
     grim
@@ -51,7 +66,7 @@
     lua
 
     # rust toolchain
-    # rustup
+    rustup
 
     # zig toolchain
     zig
