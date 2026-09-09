@@ -1,4 +1,7 @@
 {pkgs, ...}: {
+  # Allow installation of proprietary/non-open-source packages (e.g. Google-Chrome, Obsidian, Discord)
+  nixpkgs.config.allowUnfree = true;
+
   home.packages = with pkgs; [
     git
     lazygit
@@ -52,6 +55,8 @@
 
     # zig toolchain
     zig
+
+    obsidian
   ];
 
   # Enables zoxide integration in your shell, providing the `z` command for fast directory jumping
