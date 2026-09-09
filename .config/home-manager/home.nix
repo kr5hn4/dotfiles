@@ -1,4 +1,4 @@
-{...}: {
+{ ... }: {
   imports = [
     ./modules/packages.nix
     ./modules/zsh.nix
@@ -6,14 +6,15 @@
     ./modules/gammastep.nix
     ./modules/kanata.nix
     ./modules/yazi.nix
+    ./modules/gtk.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "ctrl-p";
-  home.homeDirectory = "/home/ctrl-p";
+  home.username = "nixie";
+  home.homeDirectory = "/home/nixie";
 
-  home.stateVersion = "25.05"; # Please read the comment before changing.
+  home.stateVersion = "26.05"; # Please read the comment before changing.
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
