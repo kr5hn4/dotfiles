@@ -1,4 +1,4 @@
-{lib, ...}: {
+{ lib, ... }: {
   services.gammastep = {
     enable = true;
     provider = "manual";
@@ -13,9 +13,9 @@
   };
   systemd.user.services.gammastep = {
     Unit = {
-      After = lib.mkForce [];
-      PartOf = lib.mkForce [];
+      After = lib.mkForce [ ];
+      PartOf = lib.mkForce [ ];
     };
-    Install.WantedBy = lib.mkForce ["default.target"];
+    Install.WantedBy = lib.mkForce [ "default.target" ];
   };
 }

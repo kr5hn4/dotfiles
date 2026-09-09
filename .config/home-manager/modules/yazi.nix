@@ -1,10 +1,14 @@
-{...}: {
+{ ... }: {
   programs.yazi = {
     enable = true;
 
     settings = {
       mgr = {
-        ratio = [2 2 4];
+        ratio = [
+          2
+          2
+          4
+        ];
         sort_by = "mtime";
         sort_reverse = true;
         show_hidden = false;

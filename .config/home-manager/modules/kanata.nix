@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   systemd.user.services.kanata = {
     Unit = {
       Description = "Kanata keyboard remapper";
@@ -17,7 +18,7 @@
     };
 
     Install = {
-      WantedBy = ["default.target"];
+      WantedBy = [ "default.target" ];
     };
   };
 }
