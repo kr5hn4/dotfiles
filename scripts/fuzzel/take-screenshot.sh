@@ -10,7 +10,8 @@ SCREENSHOT_DIR="$HOME/screenshots"
 mkdir -p "$SCREENSHOT_DIR"
 
 # Show Fuzzel menu with heredoc
-choice=$(fuzzel --dmenu <<EOF
+choice=$(
+    fuzzel --dmenu <<EOF
 16:9
 9:16
 1:1
@@ -22,10 +23,10 @@ EOF
 
 # Aspect ratio mapping
 case "$choice" in
-    "16:9") aspect="16:9" ;;
-    "9:16") aspect="9:16" ;;
-    "1:1")  aspect="1:1" ;;
-    *) exit 1 ;;
+"16:9") aspect="16:9" ;;
+"9:16") aspect="9:16" ;;
+"1:1") aspect="1:1" ;;
+*) exit 1 ;;
 esac
 
 # Take screenshot

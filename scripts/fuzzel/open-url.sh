@@ -11,7 +11,8 @@
 #
 ###########################################
 
-CHOICES=$(cat <<'EOF'
+CHOICES=$(
+    cat <<'EOF'
 gh:<user>        Open GitHub profile
 gh:<user>/<repo> Open GitHub repo
 yt:<query>       YouTube search
@@ -30,19 +31,19 @@ INPUT="${INPUT%%[[:space:]]*}"
 
 # Process input
 case "$INPUT" in
-  gh:*)
+gh:*)
     TARGET="${INPUT#gh:}"
     xdg-open "https://github.com/$TARGET"
     ;;
-  yt:*)
+yt:*)
     QUERY="${INPUT#yt:}"
     xdg-open "https://www.youtube.com/results?search_query=$(printf '%s' "$QUERY" | sed 's/ /+/g')"
     ;;
-  r:*)
+r:*)
     SUB="${INPUT#r:}"
     xdg-open "https://reddit.com/r/$SUB"
     ;;
-  *)
+*)
     notify-send "Unknown input: $INPUT"
     ;;
 esac

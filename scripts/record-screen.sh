@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ###############################################################################
 # Screen Recorder Toggle (Wayland)
@@ -15,12 +15,12 @@ mkdir -p "$VIDEO_DIR"
 
 cleanup() {
     rm -f "$LOCK_FILE"
-    rm -f "$OVERLAY_FILE"  # Remove overlay on stop
+    rm -f "$OVERLAY_FILE" # Remove overlay on stop
 }
 trap cleanup EXIT INT TERM
 
 # If already recording, stop it
-if pgrep -x wf-recorder > /dev/null; then
+if pgrep -x wf-recorder >/dev/null; then
     pkill -INT wf-recorder
     exit 0
 fi
@@ -34,7 +34,7 @@ fi
 
 # Create lock file and write overlay region
 touch "$LOCK_FILE"
-echo "$GEOMETRY" > "$OVERLAY_FILE"
+echo "$GEOMETRY" >"$OVERLAY_FILE"
 
 # Start recording
 wf-recorder -g "$GEOMETRY" -f "$VIDEO_DIR/recording_$(date '+%Y%m%d_%H%M%S').mp4"
