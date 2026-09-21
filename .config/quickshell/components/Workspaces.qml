@@ -8,52 +8,107 @@ Item {
 
     // Dependencies
     required property var theme
+
+    // Output this bar is shown on
+    readonly property string outputName: "HDMI-A-1"
+
     // =========================
     // Logic: Workspaces & Layouts
     // =========================
     property int currentTag: 1
     property string layoutMode: "tile"
     readonly property var layoutModeMap: ({
-        "S": "scroller",
-        "T": "tile",
-        "G": "grid",
-        "M": "monocle",
-        "K": "deck",
-        "CT": "center_tile",
-        "RT": "right_tile",
-        "VS": "vertical_scroller",
-        "VT": "vertical_tile",
-        "VG": "vertical_grid",
-        "VK": "vertical_deck",
-        "TG": "tgmix"
-    })
+            "S": "scroller",
+            "T": "tile",
+            "G": "grid",
+            "M": "monocle",
+            "K": "deck",
+            "CT": "center_tile",
+            "RT": "right_tile",
+            "VS": "vertical_scroller",
+            "VT": "vertical_tile",
+            "VG": "vertical_grid",
+            "VK": "vertical_deck",
+            "DW": "dwindle",
+            "F": "fair",
+            "VF": "vertical_fair"
+        })
     readonly property var layoutIcons: ({
-        "tile": "󰕰",
-        "scroller": "󰦪",
-        "monocle": "󰊓",
-        "grid": "󰇊",
-        "deck": "󰝘",
-        "center_tile": "󰝘",
-        "vertical_tile": "󰢮",
-        "right_tile": "󰕰",
-        "vertical_scroller": "󰦪",
-        "vertical_grid": "󰇊",
-        "vertical_deck": "󰝘",
-        "tgmix": "󰕰"
-    })
+            "tile": "󰕰",
+            "scroller": "󰦪",
+            "monocle": "󰊓",
+            "grid": "󰇊",
+            "deck": "󰝘",
+            "center_tile": "󰝘",
+            "vertical_tile": "󰢮",
+            "right_tile": "󰕰",
+            "vertical_scroller": "󰦪",
+            "vertical_grid": "󰇊",
+            "vertical_deck": "󰝘",
+            "tgmix": "󰕰"
+        })
     readonly property var workspaceIcons: ["󰆍", "", "", "󰚩", "", "󰡳", "󱛿", "", "󰂖"]
 
     function switchTag(tagNum) {
-        tagSwitchProc.command = ["mmsg", "dispatch", "view_tag," + tagNum.toString()];
+        tagSwitchProc.command = ["mmsg", "dispatch", "view," + tagNum.toString()];
         tagSwitchProc.running = true;
     }
-    // function switchTag(tagNum) {
-    //     tagSwitchProc.command = ["mmsg", "-s", "-t", tagNum.toString()];
-    //     tagSwitchProc.running = true;
-    // }
 
     function parseLayoutMode(code) {
         return layoutModeMap[code] || "tile";
+    }
+
+    // Apply one monitor object from mmsg's JSON
+    function applyMonitor(mon) {
+        if (!mon || mon.name !== outputName)
+            return;
+
+        let tag = 0;
+        if (mon.active_tags && mon.active_tags.length > 0) {
+            tag = mon.active_tags[0];
+        } else if (mon.tags) {
+            const activeTag = mon.tags.find(x => x.is_active);
+            if (activeTag)
+                tag = activeTag.index;
+        }
+        if (tag >= 1 && tag <= 9 && tag !== currentTag)
+            currentTag = tag;
+
+        if (mon.layout_symbol) {
+            const mode = parseLayoutMode(mon.layout_symbol);
+            if (mode !== layoutMode)
+                layoutMode = mode;
+        }
+    }
+
+    // Handles both {"monitors":[...]} frames and a bare monitor object
+    function applyFrame(obj) {
+        if (obj && Array.isArray(obj.monitors))
+            obj.monitors.forEach(m => applyMonitor(m));
+        else
+            applyMonitor(obj);
+    }
+
+    // Accumulates lines until they form valid JSON, so this works whether
+    // mmsg prints one frame per line or pretty-prints across several lines
+    property string frameBuf: ""
+    function feedLine(line) {
+        if (line.length === 0)
+            return;
+        if (line.charAt(0) === "{")
+            frameBuf = "";   // unindented "{" = start of a new frame
+        frameBuf += line;
+
+        let obj;
+        try {
+            obj = JSON.parse(frameBuf);
+        } catch (e) {
+            if (frameBuf.length > 262144)
+                frameBuf = "";
+            return;
+        }
+        frameBuf = "";
+        applyFrame(obj);
     }
 
     Layout.preferredWidth: 32 * 9
@@ -63,97 +118,37 @@ Item {
     Process {
         id: tagSwitchProc
 
-        command: ["mmsg", "dispatch", "view,1"]
-        // command: ["mmsg", "-s", "-t", "1"]
         running: false
     }
 
+    // Live updates (tags + layout)
     Process {
-        id: layoutWatcher
+        id: monitorWatcher
 
-        command: ["mmsg", "-o", "HDMI-A-1", "-wl"]
-        Component.onCompleted: running = true
+        command: ["mmsg", "watch", "all-monitors"]
+        running: true
 
         stdout: SplitParser {
-            onRead: (data) => {
-                if (!data)
-                    return ;
+            onRead: data => root.feedLine(data)
+        }
+    }
 
-                const parts = data.trim().split(/\s+/);
-                if (parts.length >= 2 && parts[0] === "layout") {
-                    const newMode = root.parseLayoutMode(parts[1]);
-                    if (newMode !== root.layoutMode)
-                        root.layoutMode = newMode;
+    // Initial state, in case the watch doesn't emit a snapshot on connect
+    Process {
+        id: initialState
 
+        command: ["mmsg", "get", "all-monitors"]
+        running: true
+
+        stdout: StdioCollector {
+            onStreamFinished: {
+                try {
+                    root.applyFrame(JSON.parse(text));
+                } catch (e) {
+                    console.warn("mmsg get all-monitors: could not parse output", e);
                 }
             }
         }
-
-    }
-
-    Process {
-        id: tagsWatcher
-
-        command: ["mmsg", "-o", "HDMI-A-1", "-wt"]
-        Component.onCompleted: running = true
-
-        stdout: SplitParser {
-            onRead: (data) => {
-                if (!data)
-                    return ;
-
-                const line = data.trim();
-                if (line.startsWith("tag ")) {
-                    const parts = line.split(/\s+/);
-                    if (parts.length >= 5) {
-                        const tagNum = parseInt(parts[1]);
-                        const isActive = parseInt(parts[4]) === 1;
-                        if (isActive && tagNum >= 1 && tagNum <= 9)
-                            root.currentTag = tagNum;
-
-                    }
-                }
-            }
-        }
-
-    }
-
-    // Initial state
-    Process {
-        id: tagsProc
-
-        command: ["sh", "-c", "mmsg -o HDMI-A-1 -gt | awk '/\\(null\\)/ {n++; if (n % 3 == 2) v = $4 + 0; print int(1 + log(v)/log(2))}' | tail -n 1"]
-        Component.onCompleted: running = true
-
-        stdout: SplitParser {
-            onRead: (data) => {
-                if (!data)
-                    return ;
-
-                const tag = parseInt(data.trim());
-                if (tag >= 1 && tag <= 9)
-                    root.currentTag = tag;
-
-            }
-        }
-
-    }
-
-    Process {
-        id: layoutProc
-
-        command: ["sh", "-c", "mmsg -o HDMI-A-1 -gl | awk '{print $2}'"]
-        Component.onCompleted: running = true
-
-        stdout: SplitParser {
-            onRead: (data) => {
-                if (!data)
-                    return ;
-
-                root.layoutMode = root.parseLayoutMode(data.trim());
-            }
-        }
-
     }
 
     // Sliding background highlight
@@ -174,9 +169,7 @@ Item {
                 duration: 300
                 easing.type: Easing.OutCubic
             }
-
         }
-
     }
 
     // Workspace icons
@@ -206,7 +199,6 @@ Item {
                     ColorAnimation {
                         duration: 150
                     }
-
                 }
 
                 Behavior on scale {
@@ -214,9 +206,7 @@ Item {
                         duration: 200
                         easing.type: Easing.OutBack
                     }
-
                 }
-
             }
 
             MouseArea {
@@ -227,9 +217,6 @@ Item {
                 onExited: parent.isHovered = false
                 onClicked: root.switchTag(parent.tagNum)
             }
-
         }
-
     }
-
 }
