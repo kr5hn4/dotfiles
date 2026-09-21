@@ -25,7 +25,7 @@
 (defalias
   ;; CapsLock: tap for esc, hold for ctrl
   cap (tap-hold-press 200 200 esc lctl)
-  
+
   ;; Tab: tap for tab, hold for media layer
   tab (tap-hold-press 200 200 tab (layer-toggle media))
 )
