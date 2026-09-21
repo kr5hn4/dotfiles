@@ -1,85 +1,65 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
-import Quickshell.Io
+import Quickshell.Services.Mpris
 
 Row {
     id: root
 
     required property var theme
 
-    property string status: ""
-    property string trackInfo: ""
-    property int trackLength: 0
-    property real trackPosition: 0
-    property bool isActive: status === "Playing" || status === "Paused"
+    // Which player to show: the first one that's playing,
+    // otherwise the first one that's paused, otherwise none.
+    readonly property var player: {
+        const list = Mpris.players.values;
+        let paused = null;
+        for (let i = 0; i < list.length; i++) {
+            const p = list[i];
+            if (p.playbackState === MprisPlaybackState.Playing)
+                return p;
+            if (paused === null && p.playbackState === MprisPlaybackState.Paused)
+                paused = p;
+        }
+        return paused;
+    }
+
+    // Same property names as before, so the UI below is unchanged
+    readonly property string status: player ? (player.playbackState === MprisPlaybackState.Playing ? "Playing" : "Paused") : ""
+    readonly property string trackInfo: {
+        if (!player)
+            return "";
+        const title = player.trackTitle;
+        const artist = player.trackArtist;
+        return artist ? artist + " - " + title : title;
+    }
+    // Seconds. 0 when the player doesn't report a length (e.g. live streams)
+    readonly property real trackLength: (player && player.lengthSupported) ? player.length : 0
+    // Seconds. Refreshed by the timer below via positionChanged()
+    readonly property real trackPosition: player ? player.position : 0
+    readonly property bool isActive: player !== null
 
     function formatTime(seconds) {
-        const s = Math.floor(seconds);
-        const mins = Math.floor(s / 60);
+        const s = Math.max(0, Math.floor(seconds));
+        const hrs = Math.floor(s / 3600);
+        const mins = Math.floor((s % 3600) / 60);
         const secs = s % 60;
-        return mins + ":" + (secs < 10 ? "0" : "") + secs;
+        const pad = n => (n < 10 ? "0" : "") + n;
+        return hrs > 0 ? hrs + ":" + pad(mins) + ":" + pad(secs) : mins + ":" + pad(secs);
     }
 
     spacing: 0
     visible: isActive
 
-    Process {
-        id: metadataWatcher
-        command: ["playerctl", "--player=%any", "metadata", "--follow", "--format", "{{ artist }} - {{ title }}|{{ mpris:length }}"]
-        running: true
-
-        stdout: SplitParser {
-            onRead: data => {
-                if (!data)
-                    return;
-                const parts = data.trim().split("|");
-                root.trackInfo = parts[0];
-                root.trackLength = parts[1] ? Math.floor(parseInt(parts[1]) / 1000000) : 0;
-            }
-        }
-    }
-
-    Process {
-        id: statusWatcher
-        command: ["playerctl", "--player=%any", "status", "--follow"]
-        running: true
-
-        stdout: SplitParser {
-            onRead: data => {
-                if (!data)
-                    return;
-                root.status = data.trim();
-            }
-        }
-    }
-
-    Process {
-        id: positionProc
-        command: ["playerctl", "position"]
-        running: false
-
-        onRunningChanged: {
-            if (!running)
-                positionProc.running = false;
-        }
-
-        stdout: SplitParser {
-            onRead: data => {
-                if (!data)
-                    return;
-                const val = parseFloat(data.trim());
-                if (!isNaN(val))
-                    root.trackPosition = val;
-            }
-        }
-    }
-
+    // Quickshell doesn't update `position` on its own while playing,
+    // so nudge it while something is actually playing.
     Timer {
-        interval: 1000
-        running: root.status === "Playing"
+        interval: 500
         repeat: true
-        onTriggered: positionProc.running = true
+        running: root.status === "Playing"
+        onTriggered: {
+            if (root.player)
+                root.player.positionChanged();
+        }
     }
 
     Rectangle {
@@ -118,7 +98,7 @@ Row {
             }
 
             Text {
-                text: root.formatTime(root.trackPosition) + " / " + root.formatTime(root.trackLength)
+                text: root.trackLength > 0 ? root.formatTime(root.trackPosition) + " / " + root.formatTime(root.trackLength) : root.formatTime(root.trackPosition)
                 color: root.theme.aqua
                 font.family: root.theme.fontFamily
                 font.pixelSize: root.theme.fontSize - 2
