@@ -17,7 +17,6 @@
     zip
     unzip
 
-    mako
     weechat
 
     neovim
