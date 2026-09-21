@@ -5,6 +5,8 @@
   home.packages = with pkgs; [
     git
     lazygit
+    jq
+    playerctl
 
     fzf
     eza
@@ -20,6 +22,11 @@
     weechat
 
     neovim
+    #neovim dependencies
+    gcc
+    gnumake
+    cmake
+    #neovim dependencies end
 
     # mason tools
 
@@ -29,6 +36,8 @@
 
     # Formatter
     nixfmt
+    kdePackages.qtdeclarative # for qmlformat
+    shfmt
 
     # LSP servers
     lua-language-server
@@ -71,6 +80,10 @@
     zig
 
     obsidian
+
+    libnotify
+
+    mpv
   ];
 
   # Enables zoxide integration in your shell, providing the `z` command for fast directory jumping
