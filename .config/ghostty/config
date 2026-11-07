@@ -11,13 +11,13 @@ keybind = alt+7=unbind
 keybind = alt+8=unbind
 keybind = alt+9=unbind
 
-command = $HOME/scripts/ghostty-tmux-autostart.sh
+# command = $HOME/scripts/ghostty-tmux-autostart.sh
 
 # Empty values reset the configuration to the default value
-font-family = Fira Code
-font-family-bold = Fira Code
-font-family-italic = JetBrains Mono
-font-family-bold-italic =  JetBrains Mono
+font-family = FiraCode Nerd Font Mono
+font-family-bold = FiraCode Nerd Font Mono
+font-family-italic = FiraCode Nerd Font Mono
+font-family-bold-italic =  FiraCode Nerd Font Mono
 font-size = 18
 # font-feature = -calt
 # font-feature = -liga
