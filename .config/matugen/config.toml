@@ -1,8 +1,15 @@
 [config]
 
 [config.custom_colors]
-customColor1 = {color = "#282828", blend = true}
 
-[templates.ghostty]
-input_path = "~/.config/ghostty/themes/matugen.template"
-output_path = "~/.config/ghostty/themes/matugen"
+[templates.mango]
+input_path = "~/.config/matugen/templates/mango/appearance.toml.template"
+output_path = "~/.config/mango/appearance.toml"
+
+[templates.hyprlock]
+input_path = "~/.config/matugen/templates/hypr/hyprlock.conf.template"
+output_path = "~/.config/hypr/hyprlock.conf"
+
+[templates.fuzzel]
+input_path = "~/.config/matugen/templates/fuzzel/fuzzel.ini.template"
+output_path = "~/.config/fuzzel/fuzzel.ini"
