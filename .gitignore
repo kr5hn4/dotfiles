@@ -11,3 +11,4 @@
 .config/mango/appearance.toml
 .config/fuzzel/fuzzel.ini
 .config/hypr/hyprlock.conf
+.config/btop/btop.conf
