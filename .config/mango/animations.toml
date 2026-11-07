@@ -1,0 +1,48 @@
+# ─────────────────────────────────────────────
+# animations.conf
+# Philosophy: fast in, softer out, nothing lingers.
+# Types: zoom, slide, fade, none
+# tag_animation_direction: 0-horizontal, 1-vertical
+# ─────────────────────────────────────────────
+
+animations=1
+layer_animations=1
+
+# Windows
+animation_type_open=zoom
+animation_type_close=zoom
+animation_fade_in=1
+animation_fade_out=1
+
+# Workspaces / tags
+tag_animation_direction=1
+
+# Layer surfaces (bar, launcher, notifications)
+layer_animation_type_open=slide
+layer_animation_type_close=slide
+
+# Zoom (subtle, not theatrical)
+zoom_initial_ratio=0.85
+zoom_end_ratio=0.85
+
+# Fade
+fade_in_begin_opacity=0.0
+fade_out_begin_opacity=1.0
+
+# Durations (ms)
+animation_duration_move=350
+animation_duration_open=320
+animation_duration_tag=300
+animation_duration_close=220
+animation_duration_focus=150
+
+# Curves (cubic-bezier x1,y1,x2,y2)
+# Open/move/tag: expo-out, fast start with a long gentle settle
+animation_curve_open=0.16,1.0,0.3,1.0
+animation_curve_move=0.16,1.0,0.3,1.0
+animation_curve_tag=0.16,1.0,0.3,1.0
+animation_curve_focus=0.16,1.0,0.3,1.0
+# Close: quick ease-in so windows leave without fuss
+animation_curve_close=0.7,0.0,0.84,0.0
+animation_curve_opacity_fade_in=0.16,1.0,0.3,1.0
+animation_curve_opacity_fade_out=0.4,0.0,1.0,1.0

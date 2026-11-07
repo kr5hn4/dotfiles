@@ -1,0 +1,9 @@
+# More option see https://github.com/DreamMaoMao/mango/wiki/
+
+source=./commands.toml
+source=./keybinds.toml
+source=./appearance.toml
+source=./animations.toml
+source=./layout.toml
+source=./keyboard.toml
+source=./mouse.toml

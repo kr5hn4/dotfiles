@@ -1,0 +1,19 @@
+# ── Set wallpaper ──
+# Start the awww daemon in the background
+exec_once = awww-daemon
+# Set your initial wallpaper (using the clear/no-transition flag for a faster boot)
+exec_once = sleep 0.5 && awww img $HOME/wallpapers/wallpaper.jpg --transition-type none
+
+# Run the background script to dynamically change the wallpaper based on active view and other parameters
+exec_once = ~/scripts/dynamic-wallpaper-changer.sh
+
+exec_once = kdeconnect-indicator
+
+# --- Start Quickshell ---
+exec_once = quickshell
+
+# --- Enable screensharing for wayland ---
+exec_once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
+# --- Lock screen / sleep when idle ---
+exec_once = swayidle timeout 300 'hyprlock' timeout 600 'systemctl suspend'
