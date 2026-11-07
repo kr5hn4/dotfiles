@@ -7,3 +7,7 @@
 
 # explicitly track what you own
 # !.config/systemd/user/example.service
+
+.config/mango/appearance.toml
+.config/fuzzel/fuzzel.ini
+.config/hypr/hyprlock.conf
