@@ -1,4 +1,10 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+
+let
+  unstable = import <unstable> { };
+in
+
+{
   # Allow installation of proprietary/non-open-source packages (e.g. Google-Chrome, Obsidian, Discord)
   nixpkgs.config.allowUnfree = true;
 
@@ -7,12 +13,10 @@
     lazygit
     jq
     playerctl
-
     fzf
     eza
     ripgrep
     bat
-
     htop
     btop
 
@@ -47,9 +51,7 @@
 
     fuzzel
     matugen
-
     fastfetch
-
     kanata
     awww
 
@@ -80,10 +82,16 @@
     zig
 
     obsidian
-
     libnotify
-
     mpv
+    graphviz
+    imv
+    swayidle
+    unstable.pi-coding-agent
+    bubblewrap
+    unstable.tmuxinator
+    nodejs
+    unstable.cline
   ];
 
   # Enables zoxide integration in your shell, providing the `z` command for fast directory jumping
