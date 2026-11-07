@@ -1,0 +1,177 @@
+#  ─────────────────────────────────────────────────────────
+#   hyprlock · matugen template
+#   vim: set filetype=hyprlang :
+#
+#   Always uses the .dark scheme: the background is dimmed on purpose,
+#   so light-on-dark stays readable on any type of background.
+#  ─────────────────────────────────────────────────────────
+
+$text_font  = FiraCode Nerd Font Mono
+
+# ── Layout ──────────────────────────────────────────────
+# Ring Ø 96 → field width 240 (2.5× the ring). y: from center, positive = up.
+$ring_size  = 96
+$ring_y     = 87
+$name_y     = 4
+$field_y    = -53
+
+# Lock icon (built from shapes).
+$body_w     = 34
+$body_h     = 26
+$body_r     = 8
+$body_y     = 79
+$shackle_w  = 20
+$shackle_h  = 28
+$shackle_y  = 94
+$stroke     = 3
+$key        = 4
+
+# Larger preset: replace the layout + lock values above with these.
+#   ring_size 120 · ring_y 87 · name_y -8 · field_y -65
+#   body 44×34 r10 y77 · shackle 26×36 y96 · stroke 4 · key 5
+
+general {
+    hide_cursor = true
+    ignore_empty_input = false
+    grace = 0
+    no_fade_in = false
+    disable_loading_bar = false
+}
+
+# ── The material ────────────────────────────────────────
+background {
+    monitor =
+    path = screenshot
+    blur_passes = 2
+    blur_size = 2
+    noise = 0.012
+    contrast = 0.92
+    brightness = 0.55
+    vibrancy = 0.25
+    vibrancy_darkness = 0.1
+}
+
+# ── Ring ────────────────────────────────────────────────
+shape {
+    monitor =
+    size = $ring_size, $ring_size
+    color = rgba({{ colors.surface.dark.hex_stripped }}59)
+    rounding = -1
+    border_size = 2
+    border_color = rgba({{ colors.on_surface.dark.hex_stripped }}8c)
+    position = 0, $ring_y
+    halign = center
+    valign = center
+}
+
+# ── Lock ────────────────────────────────────────────────
+# shackle: a pill outline; its lower half hides behind the body
+shape {
+    monitor =
+    size = $shackle_w, $shackle_h
+    color = rgba(00000000)
+    rounding = -1
+    border_size = $stroke
+    border_color = rgb({{ colors.primary.dark.hex_stripped }})
+    position = 0, $shackle_y
+    halign = center
+    valign = center
+}
+
+# body (drawn after the shackle so it covers the shackle's base)
+shape {
+    monitor =
+    size = $body_w, $body_h
+    color = rgb({{ colors.primary.dark.hex_stripped }})
+    rounding = $body_r
+    border_size = 0
+    position = 0, $body_y
+    halign = center
+    valign = center
+}
+
+# keyhole
+shape {
+    monitor =
+    size = $key, $key
+    color = rgb({{ colors.on_primary.dark.hex_stripped }})
+    rounding = -1
+    border_size = 0
+    position = 0, $body_y
+    halign = center
+    valign = center
+}
+
+# ── Name ────────────────────────────────────────────────
+label {
+    monitor =
+    text = <span font_weight="300" letter_spacing="1500">$USER</span>
+    color = rgba({{ colors.on_surface_variant.dark.hex_stripped }}e6)
+    font_size = 15
+    font_family = $text_font
+    shadow_passes = 2
+    shadow_size = 2
+    shadow_color = rgba({{ colors.shadow.dark.hex_stripped }}73)
+    position = 0, $name_y
+    halign = center
+    valign = center
+}
+
+# ── Password ────────────────────────────────────────────
+input-field {
+    monitor =
+    size = 240, 44
+    rounding = -1
+    outline_thickness = 2
+    outer_color = rgba({{ colors.on_surface.dark.hex_stripped }}bf) rgba({{ colors.on_surface.dark.hex_stripped }}26) 135deg   # on_surface, fading
+    inner_color = rgba({{ colors.surface.dark.hex_stripped }}a6)
+    font_color = rgb({{ colors.primary.dark.hex_stripped }})
+    font_family = $text_font
+
+    dots_size = 0.22
+    dots_spacing = 0.35
+    dots_center = true
+    dots_rounding = -1
+
+    check_color = rgba({{ colors.tertiary.dark.hex_stripped }}f2)
+    fail_color = rgba({{ colors.error.dark.hex_stripped }}f2)
+    capslock_color = rgba({{ colors.secondary.dark.hex_stripped }}f2)
+    fail_text = <span font_weight="300">$FAIL</span>
+    placeholder_text = <span font_weight="300" foreground="##{{ colors.on_surface.dark.hex_stripped }}99">password</span>
+
+    fade_on_empty = false
+    hide_input = false
+
+    shadow_passes = 2
+    shadow_size = 6
+    shadow_color = rgba({{ colors.shadow.dark.hex_stripped }}59)
+
+    position = 0, $field_y
+    halign = center
+    valign = center
+}
+
+# ── Clock (tertiary, bottom edge) ───────────────────────
+label {
+    monitor =
+    text = cmd[update:10000] echo "<span font_weight='300' letter_spacing='1000'>$(date +'%I:%M')</span>"
+    color = rgba({{ colors.on_surface_variant.dark.hex_stripped }}66)
+    font_size = 13
+    font_family = $text_font
+    position = 0, 40
+    halign = center
+    valign = bottom
+}
+
+# ── Motion ──────────────────────────────────────────────
+animations {
+    enabled = true
+    bezier = settle, 0.16, 1, 0.3, 1
+    animation = fadeIn, 1, 6, settle
+    animation = fadeOut, 1, 5, settle
+    animation = inputFieldColors, 1, 4, settle
+    animation = inputFieldFade, 1, 4, settle
+    animation = inputFieldWidth, 1, 4, settle
+    animation = inputFieldDots, 1, 3, settle
+    # animation = inputFieldError, 1, 3, settle   # uncomment if hyprlock version accepts it
+}

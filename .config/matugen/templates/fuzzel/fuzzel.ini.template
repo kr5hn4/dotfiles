@@ -1,0 +1,67 @@
+# ─────────────────────────────────────────────────────────────
+# Fuzzel · Material 3 · Matugen template
+# vim: set filetype=dosini :
+# ─────────────────────────────────────────────────────────────
+
+[main]
+namespace=launcher
+
+# ── Type ─────────────────────────────────────────────────────
+font=FiraMono Nerd Font:size=17
+line-height=44
+use-bold=yes
+
+# ── Prompt ───────────────────────────────────────────────────
+prompt="  "
+placeholder=Search apps…
+
+# ── Shape ────────────────────────────────────────────────────
+; hide-before-typing=yes
+lines=6
+width=46
+anchor=top
+y-margin=260
+horizontal-pad=32
+vertical-pad=22
+inner-pad=16
+
+# ── Icons ─────────────────────────────────────────────────────
+icons-enabled=yes
+icon-theme=Papirus
+image-size-ratio=0
+
+# ── Search ───────────────────────────────────────────────────
+match-mode=fzf
+fields=filename,name,generic,keywords,comment
+
+# ── Behavior ─────────────────────────────────────────────────
+layer=overlay
+keyboard-focus=exclusive
+exit-on-keyboard-focus-loss=yes
+enable-mouse=yes
+
+# ── Material 3 colors ─────────────────────────────────────────
+[colors]
+background={{colors.surface_container_high.dark.hex_stripped}}e6
+text={{colors.on_surface_variant.dark.hex_stripped}}ff
+input={{colors.on_surface.dark.hex_stripped}}ff
+message={{colors.on_surface_variant.dark.hex_stripped}}ff
+prompt={{colors.primary.dark.hex_stripped}}ff
+placeholder={{colors.outline.dark.hex_stripped}}ff
+match={{colors.primary.dark.hex_stripped}}ff
+selection={{colors.primary_container.dark.hex_stripped}}ff
+selection-text={{colors.on_primary_container.dark.hex_stripped}}ff
+selection-match={{colors.primary.dark.hex_stripped}}ff
+counter={{colors.outline.dark.hex_stripped}}ff
+border={{colors.outline_variant.dark.hex_stripped}}ff
+
+[border]
+width=1
+radius=22
+selection-radius=14
+
+[key-bindings]
+# Defaults kept (Ctrl+n/p, Ctrl+u, Ctrl+w, Tab, Esc).
+# prev=Up Control+p
+# next=Down Control+n
+# execute=Return KP_Enter
