@@ -6,11 +6,18 @@ return {
 		require("telescope").setup({
 			defaults = {
 				file_ignore_patterns = {
+                    "%.git/",
 					"node_modules",
 				},
 				--   mappings = {
 				--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
 				--   },
+			},
+			pickers = {
+				-- This configures find_files to show hidden files/folders
+				find_files = {
+					hidden = true,
+				},
 			},
 			-- pickers = {}
 			extensions = {
