@@ -10,11 +10,16 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			require("plugins.mason"), -- Mason setup
 			{ "j-hui/fidget.nvim", opts = {} }, -- LSP status updates
 			"hrsh7th/cmp-nvim-lsp", -- LSP completion capabilities
 		},
 		config = function()
+			vim.lsp.config("rust_analyzer", {
+				filetypes = { "rust" },
+			})
+
+			vim.lsp.enable("rust_analyzer")
+
 			-- LSP keymaps and buffer-local settings
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("lsp_attach", { clear = true }),
@@ -38,15 +43,13 @@ return {
 					map("<leader>ca", vim.lsp.buf.code_action, "Code Action", { "n", "x" })
 					map("K", vim.lsp.buf.hover, "Hover")
 
-					-- Refresh codelens automatically
-					vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-						buffer = event.buf,
-						callback = function()
-							pcall(vim.lsp.codelens.refresh)
-						end,
-					})
+					-- Enable codelens automatically if supported by the server
+					local client = vim.lsp.get_client_by_id(event.data.client_id)
+					if client and client:supports_method("textDocument/codeLens") then
+						vim.lsp.codelens.enable(true, { bufnr = event.buf })
+					end
 
-					-- CodeLens
+					-- Run CodeLens
 					map("<leader>cl", vim.lsp.codelens.run, "Run CodeLens")
 
 					-- Inlay hints (if supported by client)

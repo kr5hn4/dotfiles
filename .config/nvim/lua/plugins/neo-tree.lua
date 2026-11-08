@@ -103,7 +103,7 @@ return {
 							renamed = "",
 							untracked = "",
 							ignored = "",
-							unstaged = "",
+							unstaged = "",
 							staged = "",
 							conflict = "",
 						},
@@ -288,6 +288,7 @@ return {
 							["on"] = { "order_by_name", nowait = false },
 							["os"] = { "order_by_size", nowait = false },
 							["ot"] = { "order_by_type", nowait = false },
+							["E"] = "expand_all_nodes",
 							-- ['<key>'] = function(state) ... end,
 						},
 						fuzzy_finder_mappings = { -- define keymaps for filter popup window in fuzzy_finder_mode

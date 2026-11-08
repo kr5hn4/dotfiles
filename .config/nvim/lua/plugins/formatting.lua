@@ -30,11 +30,14 @@ return {
 				markdown = "md",
 				nix = "nix",
 				python = "py",
+				qml = "qml",
 				ruby = "rb",
 				rust = "rs",
 				teal = "tl",
 				typescript = "ts",
 				zig = "zig",
+				bash = "sh",
+				sh = "sh",
 			},
 
 			-- Disable LSP fallback for filetypes without standard formatting
@@ -48,7 +51,7 @@ return {
 
 			formatters_by_ft = {
 				lua = { "stylua" },
-				nix = { "alejandra" },
+				nix = { "nixfmt" },
 				rust = { "rustfmt" },
 				zig = { "zig" },
 
@@ -59,7 +62,7 @@ return {
 				css = { "prettier" },
 				markdown = { "prettier" },
 				html = { "prettier" },
-
+				qml = { "qmlformat" },
 				sh = { "shfmt" },
 				bash = { "shfmt" },
 			},
